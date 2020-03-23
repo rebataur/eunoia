@@ -1,0 +1,776 @@
+{% extends 'coreapp/base.html' %}
+{% block content %}
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'postitnotes/postit.css' %}">
+<link href='https://fonts.googleapis.com/css?family=Gloria+Hallelujah' rel='stylesheet' type='text/css'>
+<style>
+  .postit {
+    line-height: 1;
+    text-align: center;
+    width: 275px;
+    margin: 25px;
+    min-height: 250px;
+    max-height: 250px;
+    padding-top: 35px;
+    position: relative;
+    border: 1px solid #E8E8E8;
+    border-top: 60px solid #fdfd86;
+    font-family: 'Reenie Beanie';
+    font-size: 22px;
+    border-bottom-right-radius: 60px 5px;
+    display: inline-block;
+    background: #ffff88;
+    /* Old browsers */
+    background: -moz-linear-gradient(-45deg, #ffff88 81%, #ffff88 82%, #ffff88 82%, #ffffc6 100%);
+    /* FF3.6+ */
+    background: -webkit-gradient(linear, left top, right bottom, color-stop(81%, #ffff88), color-stop(82%, #ffff88), color-stop(82%, #ffff88), color-stop(100%, #ffffc6));
+    /* Chrome,Safari4+ */
+    background: -webkit-linear-gradient(-45deg, #ffff88 81%, #ffff88 82%, #ffff88 82%, #ffffc6 100%);
+    /* Chrome10+,Safari5.1+ */
+    background: -o-linear-gradient(-45deg, #ffff88 81%, #ffff88 82%, #ffff88 82%, #ffffc6 100%);
+    /* Opera 11.10+ */
+    background: -ms-linear-gradient(-45deg, #ffff88 81%, #ffff88 82%, #ffff88 82%, #ffffc6 100%);
+    /* IE10+ */
+    background: linear-gradient(135deg, #ffff88 81%, #ffff88 82%, #ffff88 82%, #ffffc6 100%);
+    /* W3C */
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffff88', endColorstr='#ffffc6', GradientType=1);
+    /* IE6-9 fallback on horizontal gradient */
+  }
+
+  .postit:after {
+    content: "";
+    position: absolute;
+    z-index: -1;
+    right: -0px;
+    bottom: 20px;
+    width: 200px;
+    height: 25px;
+    background: rgba(0, 0, 0, 0.2);
+    box-shadow: 2px 15px 5px rgba(0, 0, 0, 0.40);
+    -moz-transform: matrix(-1, -0.1, 0, 1, 0, 0);
+    -webkit-transform: matrix(-1, -0.1, 0, 1, 0, 0);
+    -o-transform: matrix(-1, -0.1, 0, 1, 0, 0);
+    -ms-transform: matrix(-1, -0.1, 0, 1, 0, 0);
+    transform: matrix(-1, -0.1, 0, 1, 0, 0);
+  }
+
+
+
+  .stickie {
+    background: #ffffa2;
+    position: relative;
+    vertical-align: top;
+    display: block;
+    overflow: visible;
+    padding: 24px 0 0;
+    word-wrap: break-word;
+    box-sizing: border-box;
+    border-radius: 2px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.3), 0 0 10px rgba(0, 0, 0, 0.1) inset;
+    border-bottom-right-radius: 60px 8px;
+    /* Make stickies clickable */
+  }
+
+  .stickie,
+  .stickie:active,
+  .stickie:hover,
+  .stickie:visited,
+  .stickie:focus {
+    text-decoration: none;
+    color: inherit;
+    border-bottom: 0;
+  }
+
+  .stickie label {
+    font-weight: normal;
+  }
+
+  .stickie .annotation {
+    font-size: 75%;
+    display: block;
+    position: absolute;
+    color: #816894;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    height: 1.5em;
+  }
+
+  .stickie .top-right {
+    top: .1em;
+    right: .5em;
+  }
+
+  .stickie .top-left {
+    top: .1em;
+    left: .5em;
+    width: 75%;
+  }
+
+  .stickie .headline,
+  .stickie .pay {
+    display: block;
+    padding: 0 18px;
+    position: static;
+  }
+
+  .stickie .headline {
+    font-family: "McLaren", sans-serif;
+  }
+
+  .stickie .star {
+    position: static;
+    float: left;
+    width: 20%;
+    margin-left: 0.5em;
+  }
+
+  .stickie .new {
+    color: #df5e0e;
+  }
+
+  .stickie .company-name {
+    position: static;
+    float: right;
+    width: 70%;
+    text-align: right;
+    margin-right: 0.5em;
+  }
+
+  .stickie .count {
+    margin-top: 5px;
+    color: #816894;
+    display: flex;
+  }
+
+  .stickie .count-items {
+    flex: 1;
+    font-size: 9px;
+  }
+
+  .stickie .count-text {
+    display: inline-block;
+    width: calc(100% - 6px);
+  }
+
+  .stickie .count-items.impressions {
+    flex: 1.5;
+  }
+
+  .stickie .count-items.applied {
+    flex: 1.2;
+  }
+
+  .stickie .count-arrow {
+    float: right;
+  }
+
+  .stickie .count-text,
+  .stickie .count-arrow {
+    font-size: 10px;
+  }
+
+  @media (min-width: 480px) {
+
+    .stickie .count-text,
+    .stickie .count-arrow {
+      font-size: 14px;
+    }
+  }
+
+  @media (min-width: 768px) {
+
+    .stickie .count-text,
+    .stickie .count-arrow {
+      font-size: 7px;
+    }
+
+    .stickie .count-arrow {
+      margin-top: 2px;
+    }
+  }
+
+  @media (min-width: 1200px) {
+
+    .stickie .count-text,
+    .stickie .count-arrow {
+      font-size: 8px;
+    }
+
+    .stickie .count-arrow {
+      margin-top: 1px;
+    }
+  }
+
+  .stickie .count-background {
+    display: flex;
+    height: 7px;
+    margin-top: 4px;
+    border-radius: 0 0 2px 2px;
+    overflow: hidden;
+    padding: 0;
+    list-style: none;
+  }
+
+  .stickie .count-background .background {
+    flex: 1;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+  }
+
+  .stickie .count-background .impressions.background {
+    flex: 1.5;
+    position: relative;
+    z-index: 4;
+  }
+
+  .stickie .count-background .viewed.background {
+    position: relative;
+    z-index: 3;
+  }
+
+  .stickie .count-background .opened.background {
+    position: relative;
+    z-index: 2;
+  }
+
+  .stickie .count-background .applied.background {
+    flex: 1.2;
+    position: relative;
+    z-index: 1;
+  }
+
+  .stickie .count-background .background.arrow:before {
+    content: '';
+    display: inline-block;
+    width: 7px;
+    height: 7px;
+    border-style: solid;
+    border-width: 2px 2px 0 0;
+    border-color: #ffffa2;
+    position: absolute;
+    top: 0;
+    right: -2px;
+    vertical-align: top;
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+  }
+
+  .stickie .pinned {
+    text-indent: -10000px;
+    display: block;
+    position: absolute;
+    top: -4px;
+    left: 135px;
+    left: calc(50% - 5px);
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background: #df5e0e;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.2);
+  }
+
+  .stickie.grouped.under {
+    position: absolute;
+    top: -5px;
+    left: 10px;
+    right: 20px;
+    bottom: 5px;
+    z-index: -3;
+    overflow: hidden;
+    -webkit-transition: top, left, bottom, right .1s ease-out;
+    -moz-transition: top, left, bottom, right .1s ease-out;
+    -ms-transition: top, left, bottom, right .1s ease-out;
+    -o-transition: top, left, bottom, right .1s ease-out;
+    transition: top, left, bottom, right .1s ease-out;
+  }
+
+  .stickie.grouped.under:before,
+  .stickie.grouped.under:after {
+    box-shadow: none;
+  }
+
+  .stickie.grouped.under .headline {
+    display: block;
+    overflow: hidden;
+    position: absolute;
+    top: 1.5em;
+    bottom: 1.5em;
+    left: 1.5em;
+    right: 1.5em;
+  }
+
+  .stickie.grouped.under .count-background {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+  }
+
+  .no-touch li:hover>.stickie.grouped.under {
+    top: 0px;
+    left: 15px;
+    right: 15px;
+    bottom: 0px;
+    -webkit-transition: top, left, bottom, right .1s ease-out;
+    -moz-transition: top, left, bottom, right .1s ease-out;
+    -ms-transition: top, left, bottom, right .1s ease-out;
+    -o-transition: top, left, bottom, right .1s ease-out;
+    transition: top, left, bottom, right .1s ease-out;
+  }
+
+  .no-touch li:hover>.stickie.grouped.under:nth-of-type(1) {
+    top: -15px;
+    left: 0px;
+    right: 30px;
+    bottom: 15px;
+  }
+
+  .no-touch li:hover>.stickie.grouped.under:nth-of-type(2) {
+    top: 15px;
+    left: 30px;
+    right: 0px;
+    bottom: -15px;
+  }
+
+  .no-touch li:hover>.stickie.grouped.under:nth-of-type(3) {
+    top: -10px;
+    left: 20px;
+    right: 5px;
+    bottom: 10px;
+  }
+
+  .no-touch li:hover>.stickie.grouped.under:nth-of-type(4) {
+    top: 10px;
+    left: 5px;
+    right: 25px;
+    bottom: -10px;
+  }
+
+  .no-touch li:hover>.stickie.grouped.under:nth-of-type(5) {
+    top: -25px;
+    left: 15px;
+    right: 15px;
+    bottom: 25px;
+  }
+
+  .stickiead {
+    padding: 0;
+    text-align: center;
+  }
+
+  .stickie.special {
+    background-color: #f6f6f6;
+    padding: 24px 18px;
+  }
+
+  .stickie.org {
+    background-color: #fff;
+    text-align: center;
+    font-family: "Fira Sans", arial, sans-serif;
+  }
+
+  .stickie.org img {
+    max-width: 100%;
+    height: auto;
+    max-height: 100px;
+    padding-bottom: 5px;
+  }
+
+  .stickie.announcement {
+    background-color: #ffff2c;
+  }
+
+  .stickie .pstar {
+    color: #df5e0e;
+    cursor: pointer;
+    -webkit-transition: opacity .2s ease-in-out;
+    -moz-transition: opacity .2s ease-in-out;
+    -ms-transition: opacity .2s ease-in-out;
+    -o-transition: opacity .2s ease-in-out;
+    transition: opacity .2s ease-in-out;
+  }
+
+  .stickie .pstar .fa-star-o {
+    opacity: 0.1;
+  }
+
+  .stickie:hover .pstar .fa-star-o {
+    opacity: 0.3;
+  }
+
+  .stickie .pstar .fa-star-o:hover {
+    opacity: 1.0;
+  }
+
+  .stickie .pstar .fa-spin {
+    opacity: 1.0;
+  }
+
+  div.stickie:hover,
+  div.stickie:focus {
+    /* -moz-box-shadow:10px 10px 7px rgba(0,0,0,.7); */
+    /* -webkit-box-shadow: 10px 10px 7px rgba(0,0,0,.7); */
+    box-shadow: 10px 10px 7px rgba(0, 0, 0, .1);
+    -webkit-transform: scale(1.25);
+    -moz-transform: scale(1.25);
+    -o-transform: scale(1.25);
+    position: relative;
+    z-index: 5;
+  }
+
+  .stickie {
+    padding: 4px;
+  }
+
+  div#inprogress>div>div.stickie {
+    background: #ffc29f;
+  }
+
+  div#done>div>div.stickie {
+    background: #a7fcca;
+   
+  }
+  div#todo>div>a>div.box {
+    cursor: pointer;
+  }
+  div#inprogress>div>a>div.box {
+    background: #ffc29f;
+    cursor: pointer;
+  }
+
+  div#done>div>a>div.box {
+    background: #a7fcca;
+    cursor: pointer;
+  }
+
+  div#todo>div>a, div#inprogress>div>a,div#done>div>a{
+    text-decoration: none;
+  }
+  /* body {
+    padding: 2rem;
+    font-family: 'Just Another Hand', cursive;
+    background: #f3f3f3;
+} */
+
+
+
+div.sketchyborder{
+  border-radius: 255px 15px 225px 15px/15px 225px 15px 255px;
+}
+#todo {
+  border-right:solid 5px rgba(192, 120, 11, 0.384);
+}
+#inprogress {
+  border-right:solid 5px rgba(55, 223, 139, 0.384);
+  border-radius: 1px 10px 225px 5px/5px 225px 5px 205px;
+}
+
+
+.sketchy {
+    border: 3px solid #333333;
+    border-radius: 2% 6% 5% 4% / 1% 1% 2% 4%;
+    
+    &::before {
+        content: '';
+        border: 2px solid #353535;
+        display: block;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate3d(-50%, -50%, 0) scale(1.015) rotate(0.5deg);
+        border-radius: 1% 1% 2% 4% / 2% 6% 5% 4%;
+    }
+}
+</style>
+<!-- 
+<div class="stickie" id="one">hello</div>
+<div class="sketchy">Sketchy lines</div> -->
+<div class="container" id="getting-started">
+  <ul class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="{% url 'coreapp:home'%}">Home</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="{% url 'coreapp:kanban' action='all' id=0 %}">Kanbans</a>
+    </li>
+    <!-- <li class="breadcrumb-item">
+      <a class="" href="{% url 'coreapp:kanban' action='new_kanban' id=0 %}">+</a>
+    </li> -->
+  </ul>
+  <!-- Show New Feature Form -->
+
+
+  <style>
+    .yellow {
+      background: #feffa5;
+    }
+
+    .box {
+      box-shadow: 0 2px 5px 0 #e2e2e9;
+      text-align: left;
+      /* padding: 30px 30px 50px; */
+      padding: 10px 10px 20px;
+      margin: 10px;
+      border-radius: 8px;
+      color: #000;
+      /* width:40%; */
+    }
+
+    .yellow-list {
+      /* margin: 30px 15px 0; */
+      padding: 0;
+      line-height: 20px;
+      font-weight: 400;
+      color: #555;
+    }
+  </style>
+  <h4>Activities</h4>
+  <div class="container">
+    <div class="columns">      
+      <div class="column col-4 col-sm-12" >
+        <h4 class="">To be done</h4>
+      </div>
+      <div class="column col-4 col-sm-12" >
+        <h4 class="">In-Progress</h4>
+      </div>
+      <div class="column col-4 col-sm-12" >
+        <h4 class="">Done</h4>
+      </div>
+    </div>
+    <div class="columns">
+      
+      <div class="column col-4 col-sm-12 sketchyborder" id="todo">
+        
+        {% for seq in todo_seq %}
+        {% for todo in todos %}
+
+        {% if seq.type == 'TODO' and seq.activity_id == todo.id %}
+      
+        <div class="column col-12 " id="activity-id-{{todo.id}}">
+          <a href="{% url 'coreapp:product' product_id=product.id submenu='activitykanban'%}?action=feature_update_todo&feature_id={{feature_id}}&activity_id={{todo.id}}">
+          <div class="box yellow sketchy" style="transform: rotate({{todo.rnum}}deg);">
+            <h5 >{{todo.outcome}}</h5>
+            <ul class="yellow-list">
+              <!-- <li> <a href="{% url 'coreapp:kanban' action='edit_activity' id=todo.id%}">{{todo.outcome}}</a>
+
+              </li> -->
+            </ul>
+          </div>
+        </a>
+          {% if todo.priority == 'MUST_HAVE'%}
+          <small style="">Must Have</small>
+          {% elif todo.priority == 'SHOULD_HAVE'%}
+          <small style="">Should Have</small>
+          {% elif todo.priority == 'COULD_HAVE'%}
+          <small style="">Could Have</small>
+          {% elif todo.priority == 'GOOD_TO_HAVE'%}
+          <small style="">Good to Have</small>
+          {% endif %}
+        </div>
+      
+        {%endif%}
+        {%endfor%}
+        {%endfor%}
+
+
+
+        {% if action == 'edit_activity' %}
+        <div class="modal active modal-sm" id="activity-id-{{todo.id}}">
+          <div class="modal-container" role="document">
+            <div class="modal-header"><a class="btn btn-clear float-right"
+                href="{% url 'coreapp:kanban' action='idea_kanban' id=idea_id %}" aria-label="Close"></a>
+              <div class="modal-title h5">Modal title</div>
+            </div>
+            <div class="modal-body">
+              <div class="content">
+                {{todo.outcome}}
+              </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+          </div>
+        </div>
+        {%endif %}
+      </div>
+      <div class="column col-4  col-sm-12 sketchyborder" id="inprogress">
+      
+        {% for seq in inprogress_seq %}
+        {% for todo in inprogress %}
+        {% if seq.type == 'IN_PROGRESS' and seq.activity_id == todo.id %}
+        <div class="column col-12 " id="activity-id-{{todo.id}}">
+          <a href="{% url 'coreapp:product' product_id=product.id submenu='activitykanban'%}?action=feature_update_todo&feature_id={{feature_id}}&activity_id={{todo.id}}">
+            <div class="box yellow sketchy" style="transform: rotate({{todo.rnum}}deg);">
+              <h5 >{{todo.outcome}}</h5>
+              <ul class="yellow-list">
+                <!-- <li> <a href="{% url 'coreapp:kanban' action='edit_activity' id=todo.id%}">{{todo.outcome}}</a>
+  
+                </li> -->
+              </ul>
+            </div>
+          </a>
+          {% if todo.priority == 'MUST_HAVE'%}
+          <small style="">Must Have</small>
+          {% elif todo.priority == 'SHOULD_HAVE'%}
+          <small style="">Should Have</small>
+          {% elif todo.priority == 'COULD_HAVE'%}
+          <small style="">Could Have</small>
+          {% elif todo.priority == 'GOOD_TO_HAVE'%}
+          <small style="">Good to Have</small>
+          {% endif %}
+        </div>
+
+        {%endif%}
+        {%endfor%}
+        {%endfor%}
+
+
+
+
+
+        {% if action == 'edit_activity' %}
+        <div class="modal active modal-sm" id="activity-id-{{todo.id}}">
+          <div class="modal-container" role="document">
+            <div class="modal-header"><a class="btn btn-clear float-right"
+                href="{% url 'coreapp:kanban' action='idea_kanban' id=idea_id %}" aria-label="Close"></a>
+              <div class="modal-title h5">Modal title</div>
+            </div>
+            <div class="modal-body">
+              <div class="content">
+                {{todo.outcome}}
+              </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+          </div>
+        </div>
+        {%endif %}
+      </div>
+      <div class="column col-4  col-sm-12" id="done">
+        {% for seq in done_seq %}
+        {% for todo in done %}
+        {% if seq.type == 'DONE' and seq.activity_id == todo.id %}
+        <div class="column col-12 " id="activity-id-{{todo.id}}" >
+          <a href="{% url 'coreapp:product' product_id=product.id submenu='activitykanban'%}?action=feature_update_todo&feature_id={{feature_id}}&activity_id={{todo.id}}">
+            <div class="box yellow sketchy" style="transform: rotate({{todo.rnum}}deg);">
+              <h5 >{{todo.outcome}}</h5>
+              <ul class="yellow-list">
+                <!-- <li> <a href="{% url 'coreapp:kanban' action='edit_activity' id=todo.id%}">{{todo.outcome}}</a>
+  
+                </li> -->
+              </ul>
+            </div>
+          </a>
+          {% if todo.priority == 'MUST_HAVE'%}
+          <small style="">Must Have</small>
+          {% elif todo.priority == 'SHOULD_HAVE'%}
+          <small style="">Should Have</small>
+          {% elif todo.priority == 'COULD_HAVE'%}
+          <small style="">Could Have</small>
+          {% elif todo.priority == 'GOOD_TO_HAVE'%}
+          <small style="">Good to Have</small>
+          {% endif %}
+        </div>
+
+        {%endif%}
+        {%endfor%}
+        {%endfor%}
+
+        {% if action == 'edit_activity' %}
+        <div class="modal active modal-sm" id="activity-modal-{{todo.id}}"><a class="modal-overlay" href="#modals-sizes"
+            aria-label="Close"></a>
+          <div class="modal-container" role="document">
+            <div class="modal-header"><a class="btn btn-clear float-right"
+                href="{% url 'coreapp:kanban' action='idea_kanban' id=idea_id %}" aria-label="Close"></a>
+              <div class="modal-title h5">Modal title</div>
+            </div>
+            <div class="modal-body">
+              <div class="content">
+                {{todo.outcome}}
+              </div>
+            </div>
+            <div class="modal-footer">
+            </div>
+          </div>
+        </div>
+        {%endif %}
+      </div>
+    </div>
+    {% if  action == 'feature_update_todo' %}
+      {% include 'coreapp/product/task.html' %}
+    {% endif %}
+  </div>
+
+
+
+
+</div>
+
+
+<script>
+
+  $(document).ready(function () {
+    initDragulaForFeatures();
+  });
+  function initDragulaForFeatures() {
+
+    var drake = dragula([document.getElementById('todo'), document.getElementById('inprogress'), document.getElementById('done')], {
+      revertOnSpill: true
+    });
+    drake.on('drop', function (el) {
+      $(el).fadeOut(100).css('background-color', 'yellow').fadeIn(100).fadeOut(100).fadeIn(100).css('background-color', 'lightyellow');
+      // console.log($(drake.containers[0]).children());
+      var order = -1;
+      var orderArr = [];
+      var allOrderArr = [];
+      $(drake.containers[0]).children().each(function (e) {
+        var id_str = $(this).attr('id').split('activity-id-')[1];
+        var id = parseInt(id_str);
+        order = order + 1
+        orderArr.push([id, order, 'TODO'])
+      });
+
+      console.log(orderArr);
+      allOrderArr.push(orderArr);
+      var order = -1;
+      var orderArr = [];
+      $(drake.containers[1]).children().each(function (e) {
+        var id_str = $(this).attr('id').split('activity-id-')[1];
+        var id = parseInt(id_str);
+        order = order + 1
+        orderArr.push([id, order, 'IN_PROGRESS'])
+      });
+
+      console.log(orderArr);
+      allOrderArr.push(orderArr);
+      var order = -1;
+      var orderArr = [];
+      $(drake.containers[2]).children().each(function (e) {
+        var id_str = $(this).attr('id').split('activity-id-')[1];
+        var id = parseInt(id_str);
+        order = order + 1
+        orderArr.push([id, order, 'DONE'])
+      });
+
+      console.log(orderArr);
+      allOrderArr.push(orderArr);
+      // send ajax request
+      $.ajax({
+        url: "{% url 'coreapp:kanban' action='reorder_activity' id=0 %}",
+        method: 'POST',
+        data: { order: JSON.stringify(allOrderArr) },
+        success: function (result) {
+
+        }
+
+      });
+    });
+  }
+</script>
+
+{% endblock %}

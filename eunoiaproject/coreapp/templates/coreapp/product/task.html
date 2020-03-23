@@ -1,0 +1,75 @@
+sfsdf<div class="modal active" id="task-modal">
+  <a class="modal-overlay" href="#" aria-label="Close"></a>
+  <div class="modal-container" role="document">
+    <div class="modal-header"><a class="btn btn-clear float-right" href="#" aria-label="Close"
+        onclick="closeTaskModel();"></a>
+      <div class="modal-title h5">{{activity.outcome}}</div>
+    </div>
+
+
+    <div class="modal-body">
+      <div class="content">
+        <form method="POST"
+          actino="{% url 'coreapp:product' product_id=product.id submenu='activitykanban'%}?action=feature_update_todo&feature_id={{feature_id}}&activity_id={{activity.id}}">
+          {{activity.id}}
+          {% csrf_token %}
+          {% include 'coreapp/product/taskform.html'%}
+          <button type="submit" class="btn btn-success input-group-btn">Ok</button>
+        </form>
+
+
+        <!-- <table class="table">
+          <thead>
+              <tr>
+                  <th>Title</th>
+                  <th>Author</th>
+                  <th>Created</th>
+                  <th>Status</th>
+              </tr>
+          </thead>
+          <tbody>
+            {% for activity in activities %}
+              <tr class="active">
+                  <td>
+                      <div class="popover popover-right">
+  
+                          <span><a href="{% url 'coreapp:product' product_id=product.id submenu='kanban'%}?action=feature_update_todo&feature_id={{feature.id}}&activity_id={{activity.id}}">{{activity.id}}</a></span>
+                          <div class="popover-container">
+                              <div class="card">
+                                  <div class="card-body">
+                                      {{activity.outcome}}
+                                  </div>
+                              </div>
+  
+                          </div>
+                      </div>
+                  </td>
+  
+  
+                  <td> {{activity.created_by}}</td>
+                  <td>{{activity.created_on}}</td>
+                  <td>{{activity.status}}</td>
+              </tr>
+              {% endfor %}
+          </tbody>
+      </table> -->
+     
+       
+     
+      </div>
+
+
+    </div>
+    <div class="modal-footer">
+      <!-- <a class="btn btn-link" onclick="closeTaskModel();" href="#">Close</a> -->
+
+    </div>
+
+  </div>
+</div>
+
+<script>
+  function closeTaskModel() {
+    $("div#task-modal").removeClass("active");
+  }
+</script>

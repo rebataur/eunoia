@@ -1,0 +1,93 @@
+{% csrf_token %}
+{% for error in form.non_field_errors %}
+<div class="form-group has-errors text-danger small">
+    {{error}}
+</div>
+{% endfor %}
+{% for field in form %}
+{% if field.field.widget.attrs.input_type == 'text' %}
+<div class="form-group {% if field.errors %}has-error{% endif %}">
+    <div class="col-3 col-sm-12">
+        <label class="form-label" for="{{field.name}}">{{field.label}}{% if field.field.required %}<span
+                class="required">*</span>{% endif %}</label>
+    </div>
+    <div class="col-9 col-sm-12">
+        {{ field }}
+        {% if field.help_text %}
+        <p class="form-input-hint">{{ field.errors|safe }}</p>
+        {% endif %}
+    </div>
+</div>
+{% elif field.field.widget.attrs.input_type == 'checkbox' %}
+<div class="form-group {% if field.errors %}has-error{% endif %}">
+    <div class="col-3 col-sm-12">
+        <label class="form-label" for="{{field.name}}">{{field.label}}{% if field.field.required %}<span
+                class="required">*</span>{% endif %}</label>
+    </div>
+    <div class="col-9 col-sm-12">
+        <label class="form-checkbox form-inline">
+            {{field}}<i class="form-icon"></i>
+        </label>
+
+    </div>
+
+    <div class="col-9 col-sm-12">
+        {% if field.help_text %}
+        <p class="form-input-hint">{{ field.errors|safe }}</p>
+        {% endif %}
+    </div>
+</div>
+
+{% elif field.field.widget.attrs.input_type == 'textarea' %}
+<div class="form-group">
+    <div class="col-3 col-sm-12">
+        <label class="form-label" for="input-example-6">{{field.label}}</label>
+    </div>
+    <div class="col-9 col-sm-12">
+        {{ field }}
+    </div>
+</div>
+
+
+{% elif field.field.widget.attrs.input_type == 'radio' %}
+<div class="form-group {% if field.errors %}has-error{% endif %}">
+    <div class="col-3 col-sm-12">
+        <label class="form-label" for="{{field.name}}">{{field.label}}{% if field.field.required %}<span
+                class="required">*</span>{% endif %}</label>
+    </div>
+
+    <div class="col-9 col-sm-12">
+        <!-- For Ideas -->
+        {% for choice in form.status %}
+        <label class="form-radio form-inline">
+            {{choice.tag}} <i class="form-icon"></i>{{ choice.choice_label }}
+        </label>
+
+        {% endfor %}
+
+
+        <!-- For Features -->
+        {% for choice in form.priority %}
+        <label class="form-radio form-inline">
+            {{choice.tag}} <i class="form-icon"></i>{{ choice.choice_label }}
+        </label>
+
+        {% endfor %}
+
+
+      
+
+    </div>
+
+
+</div>
+{% endif %}
+
+{% endfor %}
+<div class="form-group">
+    <div class="col-11 col-sm-10">
+    </div>
+    <div class="col-1 col-sm-1">
+        <button type="submit" class="btn btn-success input-group-btn">Ok</button>
+    </div>
+</div>

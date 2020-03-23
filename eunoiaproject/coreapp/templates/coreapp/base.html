@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    {% load static %}
+    <title>Product Management</title>
+    <meta charset="utf-8">
+    <meta name="robots" content="index, follow">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <meta http-equiv="x-ua-compatible" content="ie=edge">
+    <meta name="description"
+        content="Eunoia A tool, for Startups to Ideate , Validate, Organize,Define and Execute their Product strategy">
+    <meta name="author" content="rebataur">
+    <meta property="og:url" content="https://eunoia.uno">
+    <meta property="og:title" content="Eunoia">
+    <meta property="og:description"
+        content="Eunoia A tool, for Startups to Ideate , Validate, Organize,Define and Execute their Product strategy">
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@rebataur">
+    <meta name="twitter:creator" content="@rebataur">
+    <link rel="shortcut icon" href="img/favicons/favicon.ico">
+    <link rel="icon" href="img/favicons/favicon.png">
+    <link rel="stylesheet" href="{% static 'spectre/dist/spectre.min.css'%}">
+    <link rel="stylesheet" href="{% static 'spectre/dist/spectre-icons.min.css'%}">
+    <link rel="stylesheet" href="{% static 'spectre/dist/spectre-exp.min.css'%}">
+    <link rel="stylesheet" href="{% static 'spectre/docs/dist/docs.min.css'%}">
+    <link rel="canonical" href="https://eunoia.uno">
+    
+    <link rel="stylesheet" href="{% static 'dragula/dist/dragula.min.css'%}">
+    <style>
+        .docs-content{
+            /* width: calc(100vw - 2rem); */
+        }
+        
+        .docs-brand h2 {
+            color: black;
+        }
+
+        .btn.btn-primary {
+            background: black;
+            border-color: #4b48d6;
+            color: #fff;
+        }
+
+        .grid-hero .card .card-title {
+            color: black;
+            font-size: 1rem;
+            font-weight: 700;
+            margin-bottom: 0;
+        }
+
+        .section-hero .docs-brand h2 {
+            color: black;
+        }
+
+        small.coming-soon {
+            color: #999;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="docs-container off-canvas off-canvas-sidebar-show">
+        <div class="docs-navbar"><a class="off-canvas-toggle btn btn-link btn-action" href="#sidebar"><i
+                    class="icon icon-menu"></i></a>
+            <div class="btns d-flex">
+                <span class="algolia-autocomplete"
+                    style="position: relative; display: inline-block; direction: ltr;"><input
+                        class="docs-search form-input ds-input" type="text" placeholder="Search Docs" autocomplete="off"
+                        spellcheck="false" role="combobox" aria-autocomplete="list" aria-expanded="false"
+                        aria-label="search input" aria-owns="algolia-autocomplete-listbox-0"
+                        style="position: relative; vertical-align: top;" dir="auto">
+                    <pre aria-hidden="true"
+                        style="position: absolute; visibility: hidden; white-space: pre; font-family: -apple-system, system-ui, BlinkMacSystemFont, &quot;Segoe UI&quot;, Roboto, &quot;Helvetica Neue&quot;, sans-serif; font-size: 16px; font-style: normal; font-variant: normal; font-weight: 400; word-spacing: 0px; letter-spacing: normal; text-indent: 0px; text-rendering: optimizelegibility; text-transform: none;"></pre>
+                    <span class="ds-dropdown-menu"
+                        style="position: absolute; top: 100%; z-index: 100; display: none; left: 0px; right: auto;"
+                        role="listbox" id="algolia-autocomplete-listbox-0">
+                        <div class="ds-dataset-1"></div>
+                    </span></span>
+                    
+                    <a class="btn btn-primary ml-1"
+                    href="/accounts/logout" >bye!</a>
+                    <a 
+                    href="" onclick="alert('Coming Soon, report bug');"><img style="margin-left:10px;height: 20px;width:20px" src="{% static 'images/bug_report.png'%}"></a>
+            </div>
+        </div>
+        <div class="docs-sidebar off-canvas-sidebar" id="sidebar">
+            <div class="docs-brand"><a class="docs-logo" href="/home"><img src="{% static 'images/ninjastar.png'%}"
+                        alt="Eunoia">
+                    <h2>Eunoia - beautiful minds focussed on innovating</h2>
+                </a></div>
+            <div class="docs-nav">
+                <div class="accordion-container">
+                    <div class="accordion">
+                        <input id="accordion-getting-started" type="checkbox" name="docs-accordion-checkbox" hidden=""
+                            checked="checked" />
+                        <label class="accordion-header c-hand" for="accordion-getting-started">Ideation</label>
+                        <div class="accordion-body">
+                            <ul class="menu menu-nav">
+                               
+                                <style>
+                                    i#dnd_i.form-icon {
+                                        background: rgb(208, 224, 208);
+                                        border-color: darkgreen
+                                    }
+
+                                    input#dnd:checked+.form-icon {
+                                        background: rgb(224, 178, 173);
+                                        border-color: maroon;
+                                    }
+                                </style>
+                                <!-- <li class="menu-item"><a href="getting-started/custom.html"><span class="badge"
+                                            data-badge="8">
+                                            Chat
+                                        </span></a>
+                                    <span class="column"><label class="form-switch" style="display: inline;">
+                                            <input id="dnd" type="checkbox"
+                                                ic-get-from="" ic-trigger-on="change"
+                                                ic-target="#testing"><i id="dnd_i" class="form-icon"></i>
+                                        </label>
+                                    </span>
+
+
+
+                                    <small id="testing" class="coming-soon">Coming Soon</small>
+                                </li>
+                                <li class="menu-item"><a href="getting-started/browsers.html">Ikigai <small
+                                            class="coming-soon">Coming Soon</small></a>
+                                </li>
+                                <li class="menu-item"><a href="getting-started/browsers.html">Org <small
+                                            class="coming-soon">Coming Soon</small></a>
+                                </li> -->
+                                <li class="menu-item"><a
+                                    href="{% url 'coreapp:brainstorm' action='all' id=0 %}">Brainstorm</a>
+                            </li>
+                                <li class="menu-item"><a
+                                        href="{% url 'coreapp:idea' action='all' id=0 %}">Ideas</a>
+                                </li>
+                                <li class="menu-item"><a href="{% url 'coreapp:kanban' action='all' id=0 %}">Todos</a>
+                                </li>
+                                <!-- <li class="menu-item"><a href="getting-started/whatsnew.html">Notes</a>
+                                </li> -->
+                                <!-- <li class="menu-item"><a href="elements/icons.html">Documents</a>
+                                </li> -->
+                                <!-- <li class="menu-item"><a href="elements/forms.html">Survey</a>
+                                </li> -->
+                            </ul>
+                        </div>
+                    </div>
+
+
+                    <div class="accordion">
+                        <input id="accordion-elements-product" type="checkbox" {{product_menu_checked}}
+                            name="docs-accordion-checkbox" hidden="" />
+                        <label class="accordion-header c-hand" for="accordion-elements-product">Product</label>
+                        <div class="accordion-body">
+                            <ul class="menu menu-nav">
+
+                                {% for product in global_context.products %}
+                                <li class="menu-item">
+                                    <div class="accordion">
+                                        <input {% if product_name_checked == product.name %}checked{%else%} {%endif%}
+                                            id="accordion-elements-product-{{product.name}}" type="checkbox"
+                                            name="docs-accordion-checkbox" hidden="" />
+                                        <label class="accordion-header c-hand"
+                                            for="accordion-elements-product-{{product.name}}">{{product.name}}</label>
+                                        <div class="accordion-body">
+                                            <ul class="menu menu-nav">
+                                                <li class="menu-item"><a
+                                                        href="{% url 'coreapp:product' product_id=product.id submenu='overview' %}">{% if action == '' and product_name_checked == product.name %}<b>Overview</b>{%else%}Overview{%endif%}</a>
+                                                </li>
+                                                <li class="menu-item"><a
+                                                        href="{% url 'coreapp:product' product_id=product.id submenu='feature' %}">{% if action == 'features' and product_name_checked == product.name %}<b>Features</b>{%else%}Features{%endif%}</a>
+                                                </li>
+                                                <!-- <li class="menu-item"><a href="elements/buttons.html">MVP</a>
+                                                </li> -->
+                                                <!-- <li class="menu-item"><a href="elements/icons.html">Plan</a>
+                                                </li> -->
+                                                <li class="menu-item"><a  href="{% url 'coreapp:product' product_id=product.id submenu='featurekanban' %}">Kanban</a>
+                                                </li>
+                                                <!-- <li class="menu-item"><a href="elements/forms.html">Meeting</a>
+                                                </li>
+                                                <li class="menu-item"><a href="elements/forms.html">Discussion</a>
+                                                </li>
+                                          
+                                                <li class="menu-item"><a href="elements/icons.html">Marketing</a>
+                                                </li> -->
+                                               
+                                                <!-- <li class="menu-item"><a href="elements/icons.html">Documents</a>
+                                                </li> -->
+                                            </ul>
+                                        </div>
+                                    </div>
+                                </li>
+                                {% endfor %}
+
+
+                            </ul>
+                        </div>
+
+                        <div class="accordion-body">
+                            <ul class="menu menu-nav">
+<!-- 
+                                <li class="menu-item"><a href="getting-started/whatsnew.html">Product Admin</a>
+                                </li> -->
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- <div class="accordion">
+                        <input id="accordion-experimentals" type="checkbox" name="docs-accordion-checkbox" hidden="" />
+                        <label class="accordion-header c-hand" for="accordion-experimentals">People <small
+                                class="coming-soon">Coming Soon</small></label>
+                        <div class="accordion-body">
+                            <ul class="menu menu-nav">
+                                <li class="menu-item"><a href="experimentals/viewer-360.html">Recruitment</a>
+                                </li>
+                                <li class="menu-item"><a href="experimentals/autocomplete.html">Attendance</a>
+                                </li>
+                                <li class="menu-item"><a href="experimentals/calendars.html">Compensation</a>
+                                </li>
+                                <li class="menu-item"><a href="experimentals/carousels.html">Promotion</a>
+                                </li>
+                                <li class="menu-item"><a href="experimentals/comparison.html">Onboarding</a>
+                                </li>
+                                <li class="menu-item"><a href="experimentals/filters.html">Relieving</a>
+                                </li>
+                                <li class="menu-item"><a href="experimentals/meters.html">Action Item Reports</a>
+                                </li>
+                                <li class="menu-item"><a href="experimentals/off-canvas.html">Cost Report</a>
+                                </li>
+                                <li class="menu-item"><a href="experimentals/parallax.html">Productivity Report</a>
+                                </li>
+                                <li class="menu-item"><a href="experimentals/progress.html">Peer Feedback</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="accordion">
+                        <input id="accordion-layout" type="checkbox" name="docs-accordion-checkbox" hidden="" />
+                        <label class="accordion-header c-hand" for="accordion-layout">Customer <small
+                                class="coming-soon">Coming Soon</small></label>
+                        <div class="accordion-body">
+                            <ul class="menu menu-nav">
+                                <li class="menu-item"><a href="layout/grid.html">Potential</a>
+                                </li>
+                                <li class="menu-item"><a href="layout/responsive.html">Existing</a>
+                                </li>
+                                <li class="menu-item"><a href="layout/hero.html">Pricing</a>
+                                </li>
+                                <li class="menu-item"><a href="layout/navbar.html">Personas</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="accordion">
+                        <input id="accordion-components" type="checkbox" name="docs-accordion-checkbox" hidden="" />
+                        <label class="accordion-header c-hand" for="accordion-components">Marketing <small
+                                class="coming-soon">Coming Soon</small></label>
+                        <div class="accordion-body">
+                            <ul class="menu menu-nav">
+                                <li class="menu-item"><a href="components/accordions.html">Facebook Strategy</a>
+                                </li>
+                                <li class="menu-item"><a href="components/avatars.html">Twitter Strategy</a>
+                                </li>
+                                <li class="menu-item"><a href="components/badges.html">Instagram Strategy</a>
+                                </li>
+                                <li class="menu-item"><a href="components/bars.html">Linkedin Strategy</a>
+                                </li>
+                                <li class="menu-item"><a href="components/bars.html">Cold Calls Strategy</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="accordion">
+                        <input id="accordion-experimentals" type="checkbox" name="docs-accordion-checkbox" hidden="" />
+                        <label class="accordion-header c-hand" for="accordion-experimentals">Finance <small
+                                class="coming-soon">Coming Soon</small></label>
+                        <div class="accordion-body">
+                            <ul class="menu menu-nav">
+                                <li class="menu-item"><a href="experimentals/viewer-360.html">Accounts</a>
+                                </li>
+                                <li class="menu-item"><a href="experimentals/autocomplete.html">P&L</a>
+                                </li>
+                                <li class="menu-item"><a href="experimentals/calendars.html">Bills</a>
+                                </li>
+                                <li class="menu-item"><a href="experimentals/carousels.html">Invoices</a>
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div> -->
+
+                </div>
+            </div>
+        </div><a class="off-canvas-overlay" href="#close"></a>
+        <div class="off-canvas-content">
+            <div class="docs-content" id="content">
+
+                <h3 class="s-title">
+                    <a href="#">
+                        <figure class="avatar badge" data-badge="8" data-initial="YZ"><img
+                                src="{% static 'spectre/docs/img/avatar-1.png'%}" alt="YZ"></figure>
+                    </a> {{global_context.profile_instance.user.first_name}} {{global_context.profile_instance.user.last_name}}
+                    <small style="font-size: 0.5em;"><a href="#">(Co-Founder & CTO)</small></a>
+                    <!-- <small style="font-size: 0.5em;"><a href="#">QNotes</small></a> -->
+
+                </h3>
+                <!-- <div class="container">
+                    <div class="columns">
+                     
+                        <div class="column"><label class="form-switch">
+                                <input type="checkbox"><i class="form-icon"></i>PTO
+                            </label>
+                        </div>
+                        <div class="column"><label class="form-switch">
+                                <input type="checkbox"><i class="form-icon"></i>WFH
+                            </label>
+                        </div>
+                        <div class="column"><label class="form-switch">
+                                <input type="checkbox"><i class="form-icon"></i>DND
+                            </label>
+                        </div>
+
+                    </div>
+                    <div class="columns">
+                        <div class="column col-3 col-xs-6"><span class="badge" data-badge="">Notifications</span></div>
+                        <div class="column col-3 col-xs-6"><span class="badge" data-badge="8">Notifications</span></div>
+                        <div class="column col-3 col-xs-6"><span class="badge" data-badge="88">Notifications</span>                        </div>
+                        <div class="column col-3 col-xs-6"><span class="badge" data-badge="888">Notifications</span>
+                        </div>
+                    </div>
+                </div> -->
+
+                
+<script type="text/javascript" src="{% static 'js/jquery.js'%}"></script>
+<script type="text/javascript" src="{% static 'js/intercooler.min.js'%}"></script>
+<script type="text/javascript" src="{% static 'dragula/dist/dragula.min.js'%}"></script>
+<script>
+$(document).ready(function () {
+        $.ajaxSetup({
+            beforeSend: function (xhr, settings) {
+                function getCookie(name) {
+                    var cookieValue = null;
+                    if (document.cookie && document.cookie != '') {
+                        var cookies = document.cookie.split(';');
+                        for (var i = 0; i < cookies.length; i++) {
+                            var cookie = jQuery.trim(cookies[i]);
+                            // Does this cookie string begin with the name we want?
+
+
+                            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                break;
+                            }
+                        }
+                    }
+                    return cookieValue;
+                }
+                if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                    // Only send the token to relative URLs i.e. locally.
+                    xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                }
+            }
+        });
+
+
+
+      
+
+    });
+
+   
+</script>
+
+                {% block content %}
+                {% endblock %}
+                <div class="docs-footer container grid-lg" id="copyright">
+                    <p>
+
+                        <p>Designed and built with <span class="text-error">&hearts;</span> by <a
+                                href="https://twitter.com/rebataur" target="_blank">Eunoia</a>.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <input name="csrfmiddlewaretoken" type="hidden" value="{{ csrf_token }}" id="csrf" ic-global-include="#csrf">
+
+</body>
+
+</html>
+
+    

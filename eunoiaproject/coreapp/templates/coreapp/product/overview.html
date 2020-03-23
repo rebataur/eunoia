@@ -1,0 +1,126 @@
+{% extends 'coreapp/base.html' %}
+{% block content %}
+{% load static %}
+<div class="container" id="getting-started">
+    <div class="docs-demo columns">
+        <div class="column col-6 col-xs-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title h5">{{product_name_checked}}</div>
+                </div>
+                <div class="card-body">
+                    <p> <strong>Persona</strong> {{product.idea.intended_persona}} </p>
+                    <p>
+                        {{product.idea.core_concept}}
+                    </p>
+                    <p>
+                </div>
+                <div class="card-footer"><a class="btn btn-primary" href="getting-started/installation.html">More</a>
+                </div>
+            </div>
+        </div>
+        <div class="column col-6 col-xs-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title h5">Speed</div>
+                </div>
+                <div class="card-body">
+                    <div class="columns">
+
+                        <div class="column col-6 col-xs-12">
+                            Completion
+                        </div>
+                        <div class="column col-6 col-xs-12">
+                            <div class="bar">
+                                <div class="bar-item tooltip" data-tooltip="25%" style="width:25%;">25%</div>
+                            </div>
+                        </div>
+                        <div class="column col-6 col-xs-12">
+                            Time Left
+                        </div>
+                        <div class="column col-6 col-xs-12">
+                            <div class="bar">
+                                <div class="bar-item tooltip" data-tooltip="80%" style="width:85%;">85%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-footer"><a class="btn btn-primary" href="getting-started/custom.html">More</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="column col-6 col-xs-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title h5">Current Sprint</div>
+                </div>
+                <div class="card-body">
+                    <div class="columns">
+
+                        <div class="column col-6 col-xs-12">
+                            Completion
+                        </div>
+                        <div class="column col-6 col-xs-12">
+                            <div class="bar">
+                                <div class="bar-item tooltip" data-tooltip="25%" style="width:25%;">25%</div>
+                            </div>
+                        </div>
+                        <div class="column col-6 col-xs-12">
+                            Time Left
+                        </div>
+                        <div class="column col-6 col-xs-12">
+                            <div class="bar">
+                                <div class="bar-item tooltip" data-tooltip="80%" style="width:85%;">85%</div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="card-footer"><a class="btn btn-primary" href="getting-started/browsers.html">More</a></div>
+            </div>
+        </div>
+        <div class="column col-6 col-xs-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title h5">Current Activity</div>
+                </div>
+                <div class="card-body">
+                    <div class="columns">
+
+                        <div class="column col-6 col-xs-12">
+                            Activity 1
+                        </div>
+                        <div class="column col-6 col-xs-12">
+                            <meter class="meter" value="20" min="0" max="100"></meter>
+                        </div>
+
+                        <div class="column col-6 col-xs-12">
+                                Activity 2
+                        </div>
+                        <div class="column col-6 col-xs-12">
+                            <meter class="meter" value="20" min="0" max="100"></meter>
+                        </div>
+
+
+                        <div class="column col-6 col-xs-12">
+                                Activity 3
+                        </div>
+                        <div class="column col-6 col-xs-12">
+                            <meter class="meter" value="20" min="0" max="100"></meter>
+                        </div>
+
+
+                    </div>
+
+                </div>
+                <div class="card-footer"><a class="btn btn-primary" href="getting-started/whatsnew.html">More</a></div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+{% endblock %}

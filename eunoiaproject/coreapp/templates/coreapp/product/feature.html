@@ -1,0 +1,246 @@
+{% extends 'coreapp/base.html' %}
+{% block content %}
+{% load static %}
+<div class="container" id="getting-started">
+  <ul class="breadcrumb">
+    <li class="breadcrumb-item">
+      <a href="{% url 'coreapp:home'%}">Home</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a href="{% url 'coreapp:product' product_id=product_id submenu=submenu %}">Features</a>
+    </li>
+    <li class="breadcrumb-item">
+      <a class="" href="{% url 'coreapp:product' product_id=product_id submenu=submenu %}?action=new_feature">+</a>
+    </li>
+  </ul>
+
+
+  <!-- Show New Feature Form -->
+
+
+  {% if action == 'new_feature' or action == 'existing_feature'   %}
+  <div class="container">
+    <form method="POST" class="form-horizontal"
+      action="{% url 'coreapp:product' product_id=product_id submenu=submenu %}?action={{action|urlencode}}&feature_id={{feature_id|urlencode}}">
+      {% csrf_token %}
+      {% include 'coreapp/product/featureform.html' %}
+    </form>
+  </div>
+  <!-- Show activities only for existing feature, new features don't have activities -->
+  {% if action == 'existing_feature'   %}
+  <h4>Feature <a class=""
+      href="{% url 'coreapp:product' product_id=product_id submenu=submenu%}?action=new_activity&feature_id={{feature_id|urlencode}} ">+</a>
+  </h4>
+
+
+
+
+  <div class="column col-12">
+    <div class="filter">
+      <input class="filter-tag" id="tag-0" type="radio" name="filter-radio" hidden="" checked="">
+      <input class="filter-tag" id="tag-1" type="radio" name="filter-radio" hidden="">
+      <input class="filter-tag" id="tag-2" type="radio" name="filter-radio" hidden="">
+      <input class="filter-tag" id="tag-3" type="radio" name="filter-radio" hidden="">
+      <input class="filter-tag" id="tag-4" type="radio" name="filter-radio" hidden="">
+      <input class="filter-tag" id="tag-5" type="radio" name="filter-radio" hidden="">
+      <div class="filter-nav">
+        <label class="chip" for="tag-0">All</label>
+        <label class="chip" for="tag-1" style="background-color:rgb(190, 248, 216)">High</label>
+        <label class="chip" for="tag-2" style="background-color:rgb(200, 203, 248)">Medium</label>
+        <label class="chip" for="tag-3" style="background-color:rgb(246, 250, 193)">Low</label>
+        <label class="chip" for="tag-4" style="background-color:rgb(244, 214, 248)">Very Low</label>
+        <label class="chip" for="tag-5" style="background-color:rgb(244, 214, 248)">Unknown</label>
+
+      </div>
+
+
+      <div class="filter-body columns" id="sortable-activities" class="container">
+
+
+        {% for seq in activities_seq %}
+        {% for activity in activities %}
+        {% if seq.type == 'TODO' and seq.activity_id == activity.id %}
+
+
+
+        <div id="activity-id-{{activity.id}}" class="column col-12 filter-item"
+          data-tag="{% if activity.complexity == 'HIGH'%}tag-1{% elif activity.complexity == 'MEDIUM'%}tag-2{% elif activity.complexity == 'LOW'%}tag-3{% elif activity.complexity == 'VERY_LOW'%}tag-4{% elif activity.complexity == 'UNKNOWN'%}tag-5{% endif %}">
+          <div class=" card">
+            <div class="card-header">
+              <div class="card-title text-bold">{{activity.outcome}} <a
+                  href="{% url 'coreapp:product' product_id=product_id submenu=submenu %}?action=existing_activity&activity_id={{activity.id}}"
+                  class="default btn float-right"><i class="icon icon-edit"></i></a></div>
+              <div class="card-subtitle">{{activity.description}}</div>
+            </div>
+          </div>
+        </div>
+        {%endif%}
+        {%endfor%}
+        {%endfor%}
+
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+  {% elif action == 'new_activity'  %}
+  <H4>Feature</H4>
+  <h6>Title: {{feature.title}}</h6>
+  <h6>Description: {{feature.description}}</h6>
+  <div class="container">
+    <form method="POST" class="form-horizontal"
+      action="{% url 'coreapp:product' product_id=product_id submenu=submenu %}?action={{action|urlencode}}&feature_id={{feature_id|urlencode}}">
+      {% csrf_token %}
+      {% include 'coreapp/product/activityform.html' %}
+    </form>
+  </div>
+
+  {% elif action == 'existing_activity'  %}
+  <H4>Feature</H4>
+  <h6>Title: {{feature.title}}</h6>
+  <h6>Description: {{feature.description}}</h6>
+  <div class="container">
+    <form method="POST" class="form-horizontal"
+      action="{% url 'coreapp:product' product_id=product_id submenu=submenu %}?action={{action|urlencode}}&activity_id={{activity_id|urlencode}}">
+      {% csrf_token %}
+      {% include 'coreapp/product/activityform.html' %}
+    </form>
+  </div>
+  {% endif %}
+
+  {% if features %}
+  <div class="column col-12">
+    <div class="filter">
+      <input class="filter-tag" id="tag-0" type="radio" name="filter-radio" hidden="" checked="">
+      <input class="filter-tag" id="tag-1" type="radio" name="filter-radio" hidden="">
+      <input class="filter-tag" id="tag-2" type="radio" name="filter-radio" hidden="">
+      <input class="filter-tag" id="tag-3" type="radio" name="filter-radio" hidden="">
+      <input class="filter-tag" id="tag-4" type="radio" name="filter-radio" hidden="">
+      <div class="filter-nav">
+        <label class="chip" for="tag-0">All</label>
+
+        <label class="chip" for="tag-1" style="background-color:rgb(190, 248, 216)">Must Have</label>
+        <label class="chip" for="tag-2" style="background-color:rgb(200, 203, 248)">Should Have</label>
+        <label class="chip" for="tag-3" style="background-color:rgb(246, 250, 193)">Could Have</label>
+        <label class="chip" for="tag-4" style="background-color:rgb(244, 214, 248)">Good to Have</label>
+
+      </div>
+
+
+      <div class="filter-body columns" id="sortable" class="container">
+        {% for feature_seq in features_sequence %}
+        {% for feature in features %}
+        {% if feature.id == feature_seq.feature_id %}
+        <div id="feature-id-{{feature.id}}" class="column col-12 filter-item"
+          data-tag="{% if feature.priority == 'MUST_HAVE'%}tag-1{% elif feature.priority == 'SHOULD_HAVE'%}tag-2{% elif feature.priority == 'COULD_HAVE'%}tag-3{% elif feature.priority == 'GOOD_TO_HAVE'%}tag-4{% endif %}">
+          <div class="card">
+            <div class="card-header">
+              <div class="card-title text-bold">Ability to <u>{{feature.ability_to}}</u>, for
+                <u>{{feature.ability_for}}</u>
+                <a href="{% url 'coreapp:product' product_id=product_id submenu=submenu %}?action=existing_feature&feature_id={{feature.id}}"
+                  class="default btn float-right"><i class="icon icon-edit"></i></a>
+              </div>
+              <div class="card-subtitle">{{feature.description}}</div>
+
+            </div>
+          </div>
+        </div>
+        {% endif %}
+        {% endfor %}
+        {% endfor %}
+
+      </div>
+    </div>
+  </div>
+  {% endif %}
+
+</div>
+
+
+
+
+<script>
+
+  $(document).ready(function () {
+    initDragulaForFeatures();
+    initDragulaForActivities();
+  });
+  function initDragulaForFeatures() {
+
+    var drake = dragula([document.getElementById('sortable')], {
+      revertOnSpill: true
+    });
+    drake.on('drop', function (el) {
+      $(el).fadeOut(100).css('background-color', 'yellow').fadeIn(100).fadeOut(100).fadeIn(100).css('background-color', 'lightyellow');
+      // console.log($(drake.containers[0]).children());
+      var order = -1;
+      var orderArr = [];
+      $(drake.containers[0]).children().each(function (e) {
+        var id_str = $(this).attr('id').split('feature-id-')[1];
+        var id = parseInt(id_str);
+        order = order + 1
+        orderArr.push([id, order])
+      });
+
+      console.log(orderArr);
+
+      // send ajax request
+
+      $.ajax({
+        url: "{% url 'coreapp:product' product_id=product_id submenu=submenu %}?action=reorder_feature",
+        method: 'POST',
+        data: { order: JSON.stringify(orderArr) },
+        success: function (result) {
+
+        }
+
+      });
+    });
+  }
+
+
+  // Drag for activities
+
+
+  function initDragulaForActivities() {
+
+    var drake = dragula([document.getElementById('sortable-activities')], {
+      revertOnSpill: true
+    });
+
+
+    drake.on('drop', function (el) {
+      $(el).fadeOut(100).css('background-color', 'yellow').fadeIn(100).fadeOut(100).fadeIn(100).css('background-color', 'lightyellow');
+      // console.log($(drake.containers[0]).children());
+      var order = -1;
+      var orderArr = [];
+      var allOrderArr = [];
+      $(drake.containers[0]).children().each(function (e) {
+        var id_str = $(this).attr('id').split('activity-id-')[1];
+        var id = parseInt(id_str);
+        order = order + 1
+        orderArr.push([id, order, 'TODO'])
+      });
+
+      console.log(orderArr);
+      console.log(orderArr);
+      allOrderArr.push(orderArr);
+      // send ajax request
+      //{% url 'coreapp:kanban' action='reorder_activity' id=idea_id 
+      $.ajax({
+        url: "{% url 'coreapp:kanban' action='reorder_activity' id=0 %}",
+        method: 'POST',
+        data: { order: JSON.stringify(allOrderArr) },
+        success: function (result) {
+
+        }
+
+      });
+    });
+
+
+
+  }
+</script>
+
+{% endblock %}

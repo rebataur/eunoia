@@ -1,0 +1,131 @@
+{% extends 'coreapp/base.html' %}
+{% block content %}
+{% load static %}
+<div class="container" id="getting-started">
+    <div class="docs-demo columns">
+        <div class="column col-6 col-xs-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title h5">News : Series A Round</div>
+                </div>
+                <div class="card-body">
+                    <p> <strong>Our Startup</strong> has secured series A round.</p>
+                    <p>
+                        We were undergoing funding rounds with Arcor VC, we secured our series A round. Expect good
+                        things to happen,
+                        specially better
+                        computers, better coffee machines and better chairs ;) </p>
+                    <p>
+                </div>
+                <div class="card-footer"><a class="btn btn-primary" href="getting-started/installation.html">More</a>
+                </div>
+            </div>
+        </div>
+        <div class="column col-6 col-xs-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title h5">Me</div>
+                </div>
+                <div class="card-body">
+                    <div class="columns">
+                     
+                        <div class="column col-6 col-xs-12">
+                            Leave balance
+                        </div>
+                        <div class="column col-6 col-xs-12">
+                                <meter class="meter" value="60" min="0" max="100" low="30" high="80"></meter>
+                        </div>
+                        <div class="column col-6 col-xs-12">
+                            Attendance
+                        </div>
+                        <div class="column col-6 col-xs-12">
+                                <meter class="meter" value="20" optimum="90" min="0" max="100" low="30" high="80"></meter>
+                        </div>
+                    </div>
+                    <div class="columns">
+
+                        <div class="column"><label class="form-switch">
+                                <input type="checkbox"><i class="form-icon"></i>I'm In
+                            </label>
+                        </div>
+                        <div class="column"><label class="form-switch">
+                                <input type="checkbox"><i class="form-icon"></i>WFH
+                            </label>
+                        </div>
+                        <div class="column"><label class="form-switch">
+                            <input type="checkbox"><i class="form-icon"></i>PTO
+                        </label>
+                    </div>
+
+
+                    </div>
+                    <div class="columns">
+                        <div class="column">
+                            <a href="#">Set Reminder</a>
+                        </div>
+                        <div class="column">
+                            <a href="#">Set Meeting</a>
+                        </div>
+                        <div class="column">
+                            <a href="#">Find People</a>
+                        </div>
+
+                    </div>
+                    <div class="columns">
+
+                        <div class="column">
+                            <a href="#">Concerns</a>
+                        </div>
+                        <div class="column">
+                            <a href="#">Seek Help</a>
+                        </div>
+                        <div class="column">
+                            <a href="#">Training</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer"><a class="btn btn-primary" href="getting-started/custom.html">More</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="column col-6 col-xs-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title h5">Coming Up</div>
+                </div>
+                <div class="card-body">
+                    <div class="chip">
+                        <img src="{% static 'spectre/docs/img/avatar-1.png' %}" class="avatar avatar-sm">
+                        Cynthia B'day<span><small>(2:30PM Cafetaria)</small></span>
+                    </div>
+                    <div class="chip">
+                        <img src="{% static 'spectre/docs/img/avatar-2.png' %}" class="avatar avatar-sm">
+                        Client Visit<span><small>(4:00PM Main Hall)</small></span>
+                    </div>
+
+                </div>
+                <div class="card-footer"><a class="btn btn-primary" href="getting-started/browsers.html">More</a></div>
+            </div>
+        </div>
+        <div class="column col-6 col-xs-12">
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title h5">Welcome New Hires !</div>
+                </div>
+                <div class="card-body">
+                    <figure class="avatar avatar-xl">
+                        <img src="{% static 'spectre/docs/img/avatar-3.png' %}" alt="...">
+                    </figure>
+                    Clara joins as in our design team, she is BA in Design from NYU, she has 6 years of experience.
+                    Apart from work whe enjoys yoga, sushi and photography
+                </div>
+                <div class="card-footer"><a class="btn btn-primary" href="getting-started/whatsnew.html">More</a></div>
+            </div>
+        </div>
+
+    </div>
+
+
+</div>
+{% endblock %}

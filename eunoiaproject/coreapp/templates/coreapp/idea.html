@@ -1,0 +1,144 @@
+{% extends 'coreapp/base.html' %}
+{% block content %}
+{% load static %}
+<div class="container" id="getting-started">
+
+    <ul class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="{% url 'coreapp:home'%}">Home</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a href="{% url 'coreapp:idea' action='all' id=0 %}">Ideas</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a class="" href="{% url 'coreapp:idea' action='new_idea' id=0 %}">+</a>
+        </li>
+    </ul>
+
+    <!-- Show New Idea Form -->
+    {% if action == 'new_idea' or action == 'existing_idea' or action == 'new_ideafrombrainstorming' %}
+    <div class="container">
+        <form method="POST" class="form-horizontal" action="{% url 'coreapp:idea' action=action id=idea_id %}">
+            {% include 'coreapp/form.html' %}
+        </form>
+    </div>
+
+    {% endif %}
+    <!-- TODO -->
+    <!-- <div class="container">
+        <div class="columns">
+            <div class="column col-12">
+                <div class="form-group">
+                    <form action="{% url 'coreapp:idea' action='all' id=0 %}">
+                        <label class="form-radio form-inline">
+                            <input onchange='this.form.submit();' type="radio" name="filter" value="incubating"><i
+                                class="form-icon"></i> Incubating
+                        </label>
+                        <label class="form-radio form-inline">
+                            <input onchange='this.form.submit();' type="radio" name="filter" value="productized"><i
+                                class="form-icon"></i> Productized
+                        </label>
+                        <label class="form-radio form-inline">
+                            <input onchange='this.form.submit();' type="radio" name="filter" value="attic"><i
+                                class="form-icon"></i> Attic
+                        </label>
+                        <label class="form-radio form-inline">
+                            <input onchange='this.form.submit();' type="radio" name="filter" value="all"><i
+                                class="form-icon"></i> All
+                        </label>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div> -->
+
+    {% if action == 'new_ideafrombrainstorming' or action == 'existing_idea'%}
+    <h4>Idea Notes</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Created</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for ideanote in ideanotes %}
+            <tr class="active">
+                <td>
+                    <div class="popover popover-right">
+
+                        <span>{{ideanote.title}}</span>
+                        <div class="popover-container">
+                            <div class="card">
+                                <div class="card-body">
+                                    {{ideanote.description}}
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </td>
+
+
+                <td>{{ideanote.created_by}}</td>
+                <td>{{ideanote.created_on}}</td>
+                <td>👍<span style="position: relative;top: -11px;left: -6px;">{{ideanote.all_counts.like_count}}</span>
+                    💪<span
+                        style="position: relative;top: -11px;left: -6px;">{{ideanote.all_counts.strength_count}}</span>
+                    🎯<span style="position: relative;top: -11px;left: -6px;">
+                        {{ideanote.all_counts.marketneed_count}}</span>
+
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+
+
+    {% endif %}
+    <!-- End if for notes table for ideas -->
+
+
+    <h4>Other Ideas</h4>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Idea Name</th>
+                <th>Author</th>
+                <th>Created</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for idea in ideas %}
+            <tr class="active">
+                <td><a
+                        href="{% url 'coreapp:idea' action='existing_idea' id=idea.id %}">{{idea.idea_name}}</a>
+                </td>
+                <td>{{username}}</td>
+                <td>{{idea.created_on}}</td>
+                <td>{{idea.status}}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+
+
+
+</div>
+
+
+
+
+
+
+
+
+{% endblock %}
