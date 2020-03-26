@@ -1,0 +1,119 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href="{% static 'postitnotes/postit.css' %}">
+<link href='https://fonts.googleapis.com/css?family=Gloria+Hallelujah' rel='stylesheet' type='text/css'>
+
+
+<div class="container" id="getting-started">
+  <h1>{{brainstorm.topic}} <a href="{% url 'eunoiaapp:idea' action="new_ideafrombrainstorming" id=brainstorm.id %}" class="btn" id="add_new1">Ideate</a><a href="{% url 'eunoiaapp:brainstorm' action="new_ideanote" id=brainstorm.id %}" class="btn" id="add_new1">+</a></h1>
+
+  <div id="notetemp" style="display: none;">
+    <div class="note">
+      <a  class="button sticky_btns" title="Fav">💛</a>
+      <a  class="button sticky_btns" title="I like it">👍<span class="badge"
+          data-badge="8"></span></a>
+      <a  class="button sticky_btns" title="Our Strength">💪</a>
+      <a  class="button sticky_btns " title="Market Need">🎯</a>
+      <a  class="button sticky_btns " title="Research">🔍</a>
+      <a  class="button remove">X</a>
+      <div class="note_cnt">
+        <textarea class="title" placeholder="Enter note title"></textarea>
+        <textarea class="cnt" placeholder="Enter note description here"></textarea>
+      </div>
+    </div>
+  </div>
+  <div id="board">
+
+    {% if action == 'new_ideanote' %}
+   
+    <div class="note">
+      <a  class="button sticky_btns" title="Fav"    ic-post-to={% url 'eunoiaapp:brainstorm' action='fav_ideanote' id=new_ideanote.id %}  >{%if ideanote.is_fav%}❤️{%else%}💛{%endif%}</a>
+      <a  class="button sticky_btns" title="I like it"    ic-post-to={% url 'eunoiaapp:brainstorm' action='like_ideanote' id=new_ideanote.id %}  >👍<span class="badge" data-badge=" {{new_ideanote.all_counts.like_count}}"></span></a>
+      <a  class="button sticky_btns" title="Our Strength"    ic-post-to={% url 'eunoiaapp:brainstorm' action='strength_ideanote' id=new_ideanote.id %}  >💪<span class="badge" data-badge=" {{new_ideanote.all_counts.strength_count}}"></span></a>
+      <a  class="button sticky_btns " title="Market Need"    ic-post-to={% url 'eunoiaapp:brainstorm' action='marketneed_ideanote' id=new_ideanote.id %}  >🎯<span class="badge" data-badge=" {{new_ideanote.all_counts.marketneed_count}}"></span></a>
+      <a  class="button remove">X</a>
+    
+      <a  class="button remove">X</a>
+      <div class="note_cnt">
+        <textarea name="title" class="title" placeholder="Enter note title" charswidth="30"   ic-post-to={% url 'eunoiaapp:brainstorm' action='update_ideanote' id=new_ideanote.id %}  ic-trigger-on="blur">{{new_ideanote.title}}</textarea>
+        <textarea name="cnt" class="cnt" placeholder="Enter note description here"  charswidth="1024" ic-post-to={% url 'eunoiaapp:brainstorm' action='update_ideanote' id=new_ideanote.id %}  ic-trigger-on="blur">{{new_ideanote.description}}</textarea>
+       </div>
+    </div>
+    {% endif %}
+
+    {% for ideanote in ideanotes %}
+   
+    <div class="note"  style="transform: rotate({{ideanote.rnum}}deg);">
+      <a  class="button sticky_btns" title="Fav"    ic-post-to={% url 'eunoiaapp:brainstorm' action='fav_ideanote' id=ideanote.id %}  >{%if ideanote.is_fav%}❤️{%else%}💛{%endif%}</a>
+      <a  class="button sticky_btns" title="I like it"    ic-post-to={% url 'eunoiaapp:brainstorm' action='like_ideanote' id=ideanote.id %}  >👍<span class="badge" data-badge=" {{ideanote.all_counts.like_count}}"></span></a>
+      <a  class="button sticky_btns" title="Our Strength"    ic-post-to={% url 'eunoiaapp:brainstorm' action='strength_ideanote' id=ideanote.id %}  >💪<span class="badge" data-badge=" {{ideanote.all_counts.strength_count}}"></span></a>
+      <a  class="button sticky_btns " title="Market Need"    ic-post-to={% url 'eunoiaapp:brainstorm' action='marketneed_ideanote' id=ideanote.id %}  >🎯<span class="badge" data-badge=" {{ideanote.all_counts.marketneed_count}}"></span></a>
+      <a  class="button remove"   ic-post-to={% url 'eunoiaapp:brainstorm' action='delete_ideanote' id=ideanote.id %}>X</a>
+      <div class="note_cnt">
+        <textarea name="title" class="title" placeholder="Enter note title" charswidth="30"   ic-post-to={% url 'eunoiaapp:brainstorm' action='update_ideanote' id=ideanote.id %}  ic-trigger-on="blur">{{ideanote.title}}</textarea>
+        <textarea name="cnt" class="cnt" placeholder="Enter note description here"  charswidth="1024" ic-post-to={% url 'eunoiaapp:brainstorm' action='update_ideanote' id=ideanote.id %}  ic-trigger-on="blur">{{ideanote.description}}</textarea>
+      </div>
+    </div>
+
+    {% endfor %}
+  </div>
+</div>
+
+
+</div>
+
+
+<script src="{% static 'postitnotes/jquery.min.js' %}"></script>
+<script src="{% static 'postitnotes/jquery-ui.min.js' %}"></script>
+<script src="{% static 'postitnotes/postit.js' %}"></script>
+
+<script>
+
+
+  var noteZindex = 1;
+  function deleteNote() {
+    $(this).parent('.note').hide("puff", { percent: 133 }, 250);
+  };
+  var noteTemp = $("div#notetemp").html();
+  function newNote() {
+    $(noteTemp).hide().prependTo("#board").show("fade", 300).draggable().on('dragstart',
+      function () {
+        $(this).zIndex(++noteZindex);
+        var tempid = Date.now() / 1000 | 0;
+        $(this).find('textarea.title').attr('ic-target', '#' + tempid);
+        $(this).find('span.noteid').attr('id', '#' + tempid);
+
+      });
+
+    $('.remove').click(deleteNote);
+    $('textarea').autogrow();
+
+    $('.note');
+    return false;
+  };
+
+
+
+  $(document).ready(function () {
+
+    $("#board").height($(document).height());
+
+    $("#add_new").click(newNote);
+
+    $('.remove').click(deleteNote);
+    // newNote();
+
+    $("div#board").children().each(function(){
+      $(this).draggable().on('dragstart',
+      function () {
+        $(this).zIndex(++noteZindex);
+        var tempid = Date.now() / 1000 | 0;
+        $(this).find('textarea.title').attr('ic-target', '#' + tempid);
+        $(this).find('span.noteid').attr('id', '#' + tempid);
+
+      });
+    });
+
+
+    return false;
+  });
+</script>

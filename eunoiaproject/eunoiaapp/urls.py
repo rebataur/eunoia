@@ -1,4 +1,4 @@
-"""coreapp URL Configuration
+"""eunoiaapp URL Configuration
 
 The `urlpatterns` list routes URLs to views. For more information please see:
     https://docs.djangoproject.com/en/3.0/topics/http/urls/
@@ -18,7 +18,7 @@ from django.urls import include, path
 from django.contrib.auth.decorators import login_required
 from . import views
 
-app_name = 'coreapp'
+app_name = 'eunoiaapp'
 urlpatterns = [
     path('', views.index, name='index'),
     path('home/', views.home, name='home'),

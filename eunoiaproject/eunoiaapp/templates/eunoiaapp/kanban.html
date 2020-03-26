@@ -1,4 +1,4 @@
-{% extends 'coreapp/base.html' %}
+{% extends 'eunoiaapp/base.html' %}
 {% block content %}
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'postitnotes/postit.css' %}">
@@ -435,13 +435,13 @@
 <div class="container" id="getting-started">
   <ul class="breadcrumb">
     <li class="breadcrumb-item">
-      <a href="{% url 'coreapp:home'%}">Home</a>
+      <a href="{% url 'eunoiaapp:home'%}">Home</a>
     </li>
     <li class="breadcrumb-item">
-      <a href="{% url 'coreapp:kanban' action='all' id=0 %}">Kanbans</a>
+      <a href="{% url 'eunoiaapp:kanban' action='all' id=0 %}">Kanbans</a>
     </li>
     <!-- <li class="breadcrumb-item">
-      <a class="" href="{% url 'coreapp:kanban' action='new_kanban' id=0 %}">+</a>
+      <a class="" href="{% url 'eunoiaapp:kanban' action='new_kanban' id=0 %}">+</a>
     </li> -->
   </ul>
   <!-- Show New Feature Form -->
@@ -459,7 +459,7 @@
     <tbody>
       {% for idea in ideas %}
       <tr class="active">
-        <td><a href="{% url 'coreapp:kanban' action='idea_kanban' id=idea.id %}">{{idea.idea_name}}</a>
+        <td><a href="{% url 'eunoiaapp:kanban' action='idea_kanban' id=idea.id %}">{{idea.idea_name}}</a>
         </td>
         <td>{{username}}</td>
         <td>{{idea.created_on}}</td>
@@ -478,7 +478,7 @@
         <div class="panel">
           <div class="panel-header">
 
-            <div class="panel-title">To Be Done <a href="{% url 'coreapp:kanban' action='idea_add_todo' id=idea_id %}"
+            <div class="panel-title">To Be Done <a href="{% url 'eunoiaapp:kanban' action='idea_add_todo' id=idea_id %}"
                 class="default btn float-right"><i class="icon icon-plus"></i></a></div>
 
 
@@ -490,16 +490,16 @@
                 aria-label="Close"></a>
               <div class="modal-container" role="document">
                 <div class="modal-header"><a class="btn btn-clear float-right"
-                    href="{% url 'coreapp:kanban' action='idea_kanban' id=idea_id %}" aria-label="Close"></a>
+                    href="{% url 'eunoiaapp:kanban' action='idea_kanban' id=idea_id %}" aria-label="Close"></a>
                   <div class="modal-title h5">Modal title</div>
                 </div>
                 <div class="modal-body">
                   <div class="content">
-                    <form method="POST" action="{% url 'coreapp:kanban' action='idea_add_todo' id=idea_id %}">
+                    <form method="POST" action="{% url 'eunoiaapp:kanban' action='idea_add_todo' id=idea_id %}">
                       {% csrf_token %}
                       {{todo_form.as_p}}
                       <button class="btn btn-primary" type="submit">Submit</button><a class="btn btn-link"
-                        href="{% url 'coreapp:kanban' action='idea_kanban' id=idea_id %}"
+                        href="{% url 'eunoiaapp:kanban' action='idea_kanban' id=idea_id %}"
                         aria-label="Close">Close</a>
 
                     </form>
@@ -518,7 +518,7 @@
             {% if seq.type == 'TODO' and seq.activity_id == todo.id %}
             <div class="column col-12 " id="activity-id-{{todo.id}}">
               <div class="stickie" style="transform: rotate({{todo.rnum}}deg);"><a
-                  href="{% url 'coreapp:kanban' action='edit_activity' id=todo.id%}">{{todo.outcome}}</a></div>
+                  href="{% url 'eunoiaapp:kanban' action='edit_activity' id=todo.id%}">{{todo.outcome}}</a></div>
             </div>
 
             {%endif%}
@@ -532,7 +532,7 @@
                 href="#modals-sizes" aria-label="Close"></a>
               <div class="modal-container" role="document">
                 <div class="modal-header"><a class="btn btn-clear float-right"
-                    href="{% url 'coreapp:kanban' action='idea_kanban' id=idea_id %}" aria-label="Close"></a>
+                    href="{% url 'eunoiaapp:kanban' action='idea_kanban' id=idea_id %}" aria-label="Close"></a>
                   <div class="modal-title h5">Modal title</div>
                 </div>
                 <div class="modal-body">
@@ -566,7 +566,7 @@
             {% if seq.type == 'IN_PROGRESS' and seq.activity_id == todo.id %}
             <div class="column col-12 " id="activity-id-{{todo.id}}">
               <div class="stickie" style="transform: rotate({{todo.rnum}}deg);"><a
-                  href="{% url 'coreapp:kanban' action='edit_activity' id=todo.id%}">{{todo.outcome}}</a></div>
+                  href="{% url 'eunoiaapp:kanban' action='edit_activity' id=todo.id%}">{{todo.outcome}}</a></div>
             </div>
 
             {%endif%}
@@ -580,7 +580,7 @@
                 href="#modals-sizes" aria-label="Close"></a>
               <div class="modal-container" role="document">
                 <div class="modal-header"><a class="btn btn-clear float-right"
-                    href="{% url 'coreapp:kanban' action='idea_kanban' id=idea_id %}" aria-label="Close"></a>
+                    href="{% url 'eunoiaapp:kanban' action='idea_kanban' id=idea_id %}" aria-label="Close"></a>
                   <div class="modal-title h5">Modal title</div>
                 </div>
                 <div class="modal-body">
@@ -615,7 +615,7 @@
             {% if seq.type == 'DONE' and seq.activity_id == todo.id %}
             <div class="column col-12 " id="activity-id-{{todo.id}}">
               <div class="stickie" style="transform: rotate({{todo.rnum}}deg);"><a
-                  href="{% url 'coreapp:kanban' action='edit_activity' id=todo.id%}">{{todo.outcome}}</a></div>
+                  href="{% url 'eunoiaapp:kanban' action='edit_activity' id=todo.id%}">{{todo.outcome}}</a></div>
             </div>
 
             {%endif%}
@@ -629,7 +629,7 @@
                 href="#modals-sizes" aria-label="Close"></a>
               <div class="modal-container" role="document">
                 <div class="modal-header"><a class="btn btn-clear float-right"
-                    href="{% url 'coreapp:kanban' action='idea_kanban' id=idea_id %}" aria-label="Close"></a>
+                    href="{% url 'eunoiaapp:kanban' action='idea_kanban' id=idea_id %}" aria-label="Close"></a>
                   <div class="modal-title h5">Modal title</div>
                 </div>
                 <div class="modal-body">
@@ -708,7 +708,7 @@
       allOrderArr.push(orderArr);
       // send ajax request
       $.ajax({
-        url: "{% url 'coreapp:kanban' action='reorder_activity' id=idea_id %}",
+        url: "{% url 'eunoiaapp:kanban' action='reorder_activity' id=idea_id %}",
         method: 'POST',
         data: { order: JSON.stringify(allOrderArr) },
         success: function (result) {

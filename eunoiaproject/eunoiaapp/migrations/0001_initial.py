@@ -66,7 +66,7 @@ class Migration(migrations.Migration):
                 ('my_strength', models.BooleanField(blank=True, default=False, null=True)),
                 ('status', models.CharField(choices=[('INCUBATING', 'Incubating'), ('PRODUCTIZE', 'Productize'), ('ATTIC', 'Attic')], default='INCUBATING', max_length=30)),
                 ('created_on', models.DateField(default=datetime.datetime.now)),
-                ('brainstorming', models.ForeignKey(null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='coreapp.BrainStorm')),
+                ('brainstorming', models.ForeignKey(null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='eunoiaapp.BrainStorm')),
             ],
         ),
         migrations.CreateModel(
@@ -78,7 +78,7 @@ class Migration(migrations.Migration):
                 ('created_on', models.DateField(default=datetime.datetime.now)),
                 ('arhive', models.BooleanField(blank=True, default=False, null=True)),
                 ('updated_on', models.DateField(default=datetime.datetime.now)),
-                ('belongs_to_brainstorm', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='coreapp.BrainStorm')),
+                ('belongs_to_brainstorm', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='eunoiaapp.BrainStorm')),
             ],
         ),
         migrations.CreateModel(
@@ -88,7 +88,7 @@ class Migration(migrations.Migration):
                 ('name', models.CharField(max_length=1024)),
                 ('overview', models.CharField(max_length=1024)),
                 ('epic', models.CharField(max_length=1024)),
-                ('idea', models.ForeignKey(null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='coreapp.Idea')),
+                ('idea', models.ForeignKey(null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='eunoiaapp.Idea')),
             ],
         ),
         migrations.CreateModel(
@@ -96,7 +96,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('template', models.CharField(default='In order to <receive benefit> as a <role>, I can <goal/desire>', max_length=1024)),
-                ('feature', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='coreapp.Feature')),
+                ('feature', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='eunoiaapp.Feature')),
             ],
         ),
         migrations.CreateModel(
@@ -105,7 +105,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('start_date', models.DateField()),
                 ('end_date', models.DateField()),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='coreapp.Product')),
+                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='eunoiaapp.Product')),
             ],
         ),
         migrations.CreateModel(
@@ -131,7 +131,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='product',
             name='owner',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='coreapp.Profile'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='eunoiaapp.Profile'),
         ),
         migrations.CreateModel(
             name='Notification',
@@ -147,34 +147,34 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('action', models.CharField(max_length=30)),
-                ('belongs_to_ideanote', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='coreapp.IdeaNote')),
-                ('created_by', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='coreapp.Profile')),
+                ('belongs_to_ideanote', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='eunoiaapp.IdeaNote')),
+                ('created_by', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='eunoiaapp.Profile')),
             ],
         ),
         migrations.AddField(
             model_name='ideanote',
             name='created_by',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='coreapp.Profile'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='eunoiaapp.Profile'),
         ),
         migrations.AddField(
             model_name='idea',
             name='created_by',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='coreapp.Profile'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='eunoiaapp.Profile'),
         ),
         migrations.AddField(
             model_name='feature',
             name='created_by',
-            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='feature_created_by_set', to='coreapp.Profile'),
+            field=models.ForeignKey(null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='feature_created_by_set', to='eunoiaapp.Profile'),
         ),
         migrations.AddField(
             model_name='feature',
             name='product',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='coreapp.Product'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='eunoiaapp.Product'),
         ),
         migrations.AddField(
             model_name='brainstorm',
             name='created_by',
-            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='coreapp.Profile'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='eunoiaapp.Profile'),
         ),
         migrations.CreateModel(
             name='Activity',
@@ -187,13 +187,13 @@ class Migration(migrations.Migration):
                 ('description', models.CharField(max_length=1024, null=True)),
                 ('note', models.CharField(max_length=1024, null=True)),
                 ('created_on', models.DateField(default=datetime.datetime.now)),
-                ('assigned_to', models.ForeignKey(null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='assignedto_by_set', to='coreapp.Profile')),
-                ('belongs_to_sprint', models.ForeignKey(null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='coreapp.Sprint')),
-                ('created_by', models.ForeignKey(null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='created_by_set', to='coreapp.Profile')),
-                ('depends_on', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='coreapp.Activity')),
-                ('related_to_feature', models.ForeignKey(null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='coreapp.Feature')),
-                ('related_to_idea', models.ForeignKey(null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='coreapp.Idea')),
-                ('user_story', models.ForeignKey(null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='coreapp.UserStory')),
+                ('assigned_to', models.ForeignKey(null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='assignedto_by_set', to='eunoiaapp.Profile')),
+                ('belongs_to_sprint', models.ForeignKey(null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='eunoiaapp.Sprint')),
+                ('created_by', models.ForeignKey(null=True, on_delete=django.db.models.deletion.DO_NOTHING, related_name='created_by_set', to='eunoiaapp.Profile')),
+                ('depends_on', models.ForeignKey(null=True, on_delete=django.db.models.deletion.CASCADE, to='eunoiaapp.Activity')),
+                ('related_to_feature', models.ForeignKey(null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='eunoiaapp.Feature')),
+                ('related_to_idea', models.ForeignKey(null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='eunoiaapp.Idea')),
+                ('user_story', models.ForeignKey(null=True, on_delete=django.db.models.deletion.DO_NOTHING, to='eunoiaapp.UserStory')),
             ],
         ),
     ]

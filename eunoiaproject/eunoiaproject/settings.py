@@ -32,7 +32,7 @@ ALLOWED_HOSTS = ['localhost']
 
 INSTALLED_APPS = [
     # Core App
-    'coreapp.apps.CoreappConfig',
+    'eunoiaapp.apps.eunoiaappConfig',
 
     # Standard Apps
     'django.contrib.admin',

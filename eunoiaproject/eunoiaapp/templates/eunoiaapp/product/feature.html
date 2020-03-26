@@ -1,16 +1,16 @@
-{% extends 'coreapp/base.html' %}
+{% extends 'eunoiaapp/base.html' %}
 {% block content %}
 {% load static %}
 <div class="container" id="getting-started">
   <ul class="breadcrumb">
     <li class="breadcrumb-item">
-      <a href="{% url 'coreapp:home'%}">Home</a>
+      <a href="{% url 'eunoiaapp:home'%}">Home</a>
     </li>
     <li class="breadcrumb-item">
-      <a href="{% url 'coreapp:product' product_id=product_id submenu=submenu %}">Features</a>
+      <a href="{% url 'eunoiaapp:product' product_id=product_id submenu=submenu %}">Features</a>
     </li>
     <li class="breadcrumb-item">
-      <a class="" href="{% url 'coreapp:product' product_id=product_id submenu=submenu %}?action=new_feature">+</a>
+      <a class="" href="{% url 'eunoiaapp:product' product_id=product_id submenu=submenu %}?action=new_feature">+</a>
     </li>
   </ul>
 
@@ -21,15 +21,15 @@
   {% if action == 'new_feature' or action == 'existing_feature'   %}
   <div class="container">
     <form method="POST" class="form-horizontal"
-      action="{% url 'coreapp:product' product_id=product_id submenu=submenu %}?action={{action|urlencode}}&feature_id={{feature_id|urlencode}}">
+      action="{% url 'eunoiaapp:product' product_id=product_id submenu=submenu %}?action={{action|urlencode}}&feature_id={{feature_id|urlencode}}">
       {% csrf_token %}
-      {% include 'coreapp/product/featureform.html' %}
+      {% include 'eunoiaapp/product/featureform.html' %}
     </form>
   </div>
   <!-- Show activities only for existing feature, new features don't have activities -->
   {% if action == 'existing_feature'   %}
   <h4>Feature <a class=""
-      href="{% url 'coreapp:product' product_id=product_id submenu=submenu%}?action=new_activity&feature_id={{feature_id|urlencode}} ">+</a>
+      href="{% url 'eunoiaapp:product' product_id=product_id submenu=submenu%}?action=new_activity&feature_id={{feature_id|urlencode}} ">+</a>
   </h4>
 
 
@@ -68,7 +68,7 @@
           <div class=" card">
             <div class="card-header">
               <div class="card-title text-bold">{{activity.outcome}} <a
-                  href="{% url 'coreapp:product' product_id=product_id submenu=submenu %}?action=existing_activity&activity_id={{activity.id}}"
+                  href="{% url 'eunoiaapp:product' product_id=product_id submenu=submenu %}?action=existing_activity&activity_id={{activity.id}}"
                   class="default btn float-right"><i class="icon icon-edit"></i></a></div>
               <div class="card-subtitle">{{activity.description}}</div>
             </div>
@@ -89,9 +89,9 @@
   <h6>Description: {{feature.description}}</h6>
   <div class="container">
     <form method="POST" class="form-horizontal"
-      action="{% url 'coreapp:product' product_id=product_id submenu=submenu %}?action={{action|urlencode}}&feature_id={{feature_id|urlencode}}">
+      action="{% url 'eunoiaapp:product' product_id=product_id submenu=submenu %}?action={{action|urlencode}}&feature_id={{feature_id|urlencode}}">
       {% csrf_token %}
-      {% include 'coreapp/product/activityform.html' %}
+      {% include 'eunoiaapp/product/activityform.html' %}
     </form>
   </div>
 
@@ -101,9 +101,9 @@
   <h6>Description: {{feature.description}}</h6>
   <div class="container">
     <form method="POST" class="form-horizontal"
-      action="{% url 'coreapp:product' product_id=product_id submenu=submenu %}?action={{action|urlencode}}&activity_id={{activity_id|urlencode}}">
+      action="{% url 'eunoiaapp:product' product_id=product_id submenu=submenu %}?action={{action|urlencode}}&activity_id={{activity_id|urlencode}}">
       {% csrf_token %}
-      {% include 'coreapp/product/activityform.html' %}
+      {% include 'eunoiaapp/product/activityform.html' %}
     </form>
   </div>
   {% endif %}
@@ -137,7 +137,7 @@
             <div class="card-header">
               <div class="card-title text-bold">Ability to <u>{{feature.ability_to}}</u>, for
                 <u>{{feature.ability_for}}</u>
-                <a href="{% url 'coreapp:product' product_id=product_id submenu=submenu %}?action=existing_feature&feature_id={{feature.id}}"
+                <a href="{% url 'eunoiaapp:product' product_id=product_id submenu=submenu %}?action=existing_feature&feature_id={{feature.id}}"
                   class="default btn float-right"><i class="icon icon-edit"></i></a>
               </div>
               <div class="card-subtitle">{{feature.description}}</div>
@@ -187,7 +187,7 @@
       // send ajax request
 
       $.ajax({
-        url: "{% url 'coreapp:product' product_id=product_id submenu=submenu %}?action=reorder_feature",
+        url: "{% url 'eunoiaapp:product' product_id=product_id submenu=submenu %}?action=reorder_feature",
         method: 'POST',
         data: { order: JSON.stringify(orderArr) },
         success: function (result) {
@@ -226,9 +226,9 @@
       console.log(orderArr);
       allOrderArr.push(orderArr);
       // send ajax request
-      //{% url 'coreapp:kanban' action='reorder_activity' id=idea_id 
+      //{% url 'eunoiaapp:kanban' action='reorder_activity' id=idea_id 
       $.ajax({
-        url: "{% url 'coreapp:kanban' action='reorder_activity' id=0 %}",
+        url: "{% url 'eunoiaapp:kanban' action='reorder_activity' id=0 %}",
         method: 'POST',
         data: { order: JSON.stringify(allOrderArr) },
         success: function (result) {

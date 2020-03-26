@@ -10,10 +10,10 @@ sfsdf<div class="modal active" id="task-modal">
     <div class="modal-body">
       <div class="content">
         <form method="POST"
-          actino="{% url 'coreapp:product' product_id=product.id submenu='activitykanban'%}?action=feature_update_todo&feature_id={{feature_id}}&activity_id={{activity.id}}">
+          actino="{% url 'eunoiaapp:product' product_id=product.id submenu='activitykanban'%}?action=feature_update_todo&feature_id={{feature_id}}&activity_id={{activity.id}}">
           {{activity.id}}
           {% csrf_token %}
-          {% include 'coreapp/product/taskform.html'%}
+          {% include 'eunoiaapp/product/taskform.html'%}
           <button type="submit" class="btn btn-success input-group-btn">Ok</button>
         </form>
 
@@ -33,7 +33,7 @@ sfsdf<div class="modal active" id="task-modal">
                   <td>
                       <div class="popover popover-right">
   
-                          <span><a href="{% url 'coreapp:product' product_id=product.id submenu='kanban'%}?action=feature_update_todo&feature_id={{feature.id}}&activity_id={{activity.id}}">{{activity.id}}</a></span>
+                          <span><a href="{% url 'eunoiaapp:product' product_id=product.id submenu='kanban'%}?action=feature_update_todo&feature_id={{feature.id}}&activity_id={{activity.id}}">{{activity.id}}</a></span>
                           <div class="popover-container">
                               <div class="card">
                                   <div class="card-body">

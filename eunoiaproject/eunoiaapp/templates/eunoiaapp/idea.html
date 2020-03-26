@@ -1,25 +1,25 @@
-{% extends 'coreapp/base.html' %}
+{% extends 'eunoiaapp/base.html' %}
 {% block content %}
 {% load static %}
 <div class="container" id="getting-started">
 
     <ul class="breadcrumb">
         <li class="breadcrumb-item">
-            <a href="{% url 'coreapp:home'%}">Home</a>
+            <a href="{% url 'eunoiaapp:home'%}">Home</a>
         </li>
         <li class="breadcrumb-item">
-            <a href="{% url 'coreapp:idea' action='all' id=0 %}">Ideas</a>
+            <a href="{% url 'eunoiaapp:idea' action='all' id=0 %}">Ideas</a>
         </li>
         <li class="breadcrumb-item">
-            <a class="" href="{% url 'coreapp:idea' action='new_idea' id=0 %}">+</a>
+            <a class="" href="{% url 'eunoiaapp:idea' action='new_idea' id=0 %}">+</a>
         </li>
     </ul>
 
     <!-- Show New Idea Form -->
     {% if action == 'new_idea' or action == 'existing_idea' or action == 'new_ideafrombrainstorming' %}
     <div class="container">
-        <form method="POST" class="form-horizontal" action="{% url 'coreapp:idea' action=action id=idea_id %}">
-            {% include 'coreapp/form.html' %}
+        <form method="POST" class="form-horizontal" action="{% url 'eunoiaapp:idea' action=action id=idea_id %}">
+            {% include 'eunoiaapp/form.html' %}
         </form>
     </div>
 
@@ -29,7 +29,7 @@
         <div class="columns">
             <div class="column col-12">
                 <div class="form-group">
-                    <form action="{% url 'coreapp:idea' action='all' id=0 %}">
+                    <form action="{% url 'eunoiaapp:idea' action='all' id=0 %}">
                         <label class="form-radio form-inline">
                             <input onchange='this.form.submit();' type="radio" name="filter" value="incubating"><i
                                 class="form-icon"></i> Incubating
@@ -118,7 +118,7 @@
             {% for idea in ideas %}
             <tr class="active">
                 <td><a
-                        href="{% url 'coreapp:idea' action='existing_idea' id=idea.id %}">{{idea.idea_name}}</a>
+                        href="{% url 'eunoiaapp:idea' action='existing_idea' id=idea.id %}">{{idea.idea_name}}</a>
                 </td>
                 <td>{{username}}</td>
                 <td>{{idea.created_on}}</td>

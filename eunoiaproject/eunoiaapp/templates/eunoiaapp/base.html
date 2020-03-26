@@ -131,12 +131,12 @@
                                             class="coming-soon">Coming Soon</small></a>
                                 </li> -->
                                 <li class="menu-item"><a
-                                    href="{% url 'coreapp:brainstorm' action='all' id=0 %}">Brainstorm</a>
+                                    href="{% url 'eunoiaapp:brainstorm' action='all' id=0 %}">Brainstorm</a>
                             </li>
                                 <li class="menu-item"><a
-                                        href="{% url 'coreapp:idea' action='all' id=0 %}">Ideas</a>
+                                        href="{% url 'eunoiaapp:idea' action='all' id=0 %}">Ideas</a>
                                 </li>
-                                <li class="menu-item"><a href="{% url 'coreapp:kanban' action='all' id=0 %}">Todos</a>
+                                <li class="menu-item"><a href="{% url 'eunoiaapp:kanban' action='all' id=0 %}">Todos</a>
                                 </li>
                                 <!-- <li class="menu-item"><a href="getting-started/whatsnew.html">Notes</a>
                                 </li> -->
@@ -167,16 +167,16 @@
                                         <div class="accordion-body">
                                             <ul class="menu menu-nav">
                                                 <li class="menu-item"><a
-                                                        href="{% url 'coreapp:product' product_id=product.id submenu='overview' %}">{% if action == '' and product_name_checked == product.name %}<b>Overview</b>{%else%}Overview{%endif%}</a>
+                                                        href="{% url 'eunoiaapp:product' product_id=product.id submenu='overview' %}">{% if action == '' and product_name_checked == product.name %}<b>Overview</b>{%else%}Overview{%endif%}</a>
                                                 </li>
                                                 <li class="menu-item"><a
-                                                        href="{% url 'coreapp:product' product_id=product.id submenu='feature' %}">{% if action == 'features' and product_name_checked == product.name %}<b>Features</b>{%else%}Features{%endif%}</a>
+                                                        href="{% url 'eunoiaapp:product' product_id=product.id submenu='feature' %}">{% if action == 'features' and product_name_checked == product.name %}<b>Features</b>{%else%}Features{%endif%}</a>
                                                 </li>
                                                 <!-- <li class="menu-item"><a href="elements/buttons.html">MVP</a>
                                                 </li> -->
                                                 <!-- <li class="menu-item"><a href="elements/icons.html">Plan</a>
                                                 </li> -->
-                                                <li class="menu-item"><a  href="{% url 'coreapp:product' product_id=product.id submenu='featurekanban' %}">Kanban</a>
+                                                <li class="menu-item"><a  href="{% url 'eunoiaapp:product' product_id=product.id submenu='featurekanban' %}">Kanban</a>
                                                 </li>
                                                 <!-- <li class="menu-item"><a href="elements/forms.html">Meeting</a>
                                                 </li>

@@ -1,25 +1,25 @@
-{% extends 'coreapp/base.html' %}
+{% extends 'eunoiaapp/base.html' %}
 {% block content %}
 {% load static %}
 <div class="container" id="getting-started">
 
     <ul class="breadcrumb">
         <li class="breadcrumb-item">
-            <a href="{% url 'coreapp:home'%}">Home</a>
+            <a href="{% url 'eunoiaapp:home'%}">Home</a>
         </li>
         <li class="breadcrumb-item">
-            <a href="{% url 'coreapp:brainstorm' action='all' id=0 %}">Topics</a>
+            <a href="{% url 'eunoiaapp:brainstorm' action='all' id=0 %}">Topics</a>
         </li>
         <li class="breadcrumb-item">
-            <a class="" href="{% url 'coreapp:brainstorm' action='new_brainstorm' id=0 %}">+</a>
+            <a class="" href="{% url 'eunoiaapp:brainstorm' action='new_brainstorm' id=0 %}">+</a>
         </li>
     </ul>
 
     <!-- Show New Idea Form -->
     {% if action == 'new_brainstorm' or action == 'existing_brainstorm' or action == 'all'%}
     <div class="container">
-        <form method="POST" class="form-horizontal" action="{% url 'coreapp:brainstorm' action=action id=0 %}">
-            {% include 'coreapp/form.html' %}
+        <form method="POST" class="form-horizontal" action="{% url 'eunoiaapp:brainstorm' action=action id=0 %}">
+            {% include 'eunoiaapp/form.html' %}
         </form>
     </div>
     <table class="table">
@@ -34,7 +34,7 @@
             {% for brainstorm in brainstorms %}
             <tr class="active">
                 <td><a
-                        href="{% url 'coreapp:brainstorm' action='ideanote' id=brainstorm.id %}">{{brainstorm.topic}}</a>
+                        href="{% url 'eunoiaapp:brainstorm' action='ideanote' id=brainstorm.id %}">{{brainstorm.topic}}</a>
                 </td>
                 <td>{{username}}</td>
                 <td>{{brainstorm.created_on}}</td>
@@ -45,7 +45,7 @@
 
 
     {% elif action == 'ideanote' or action == 'new_ideanote' %}
-        {% include 'coreapp/brainstormnotes.html' %}
+        {% include 'eunoiaapp/brainstormnotes.html' %}
     {% endif %}
 
 

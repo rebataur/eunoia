@@ -41,7 +41,7 @@ def index(request):
     num =   randint(0,15)
     context = {'chaos_num':num}
 
-    return render(request, "coreapp/index.html", context)
+    return render(request, "eunoiaapp/index.html", context)
 
 @login_required
 def home(request):
@@ -51,7 +51,7 @@ def home(request):
     context = {
         'global_context' : global_context
     }
-    return render(request, "coreapp/home.html", context)
+    return render(request, "eunoiaapp/home.html", context)
 
 
 @login_required
@@ -113,7 +113,7 @@ def kanban(request,action,id):
                 activity.status=activity_arr[2]
                 activity.save()
   
-    return render(request, "coreapp/kanban.html", context)
+    return render(request, "eunoiaapp/kanban.html", context)
 
 @login_required
 def idea(request,action,id):
@@ -171,7 +171,7 @@ def idea(request,action,id):
 
 
   
-    return render(request, "coreapp/idea.html", context)
+    return render(request, "eunoiaapp/idea.html", context)
 
 
 @login_required
@@ -252,7 +252,7 @@ def brainstorm(request,action,id):
         elif action =='marketneed_ideanote':
             return HttpResponse('🎯<span class="badge" data-badge="{}"></span>'.format(action_counts['marketneed_count']))
     
-    return render(request, "coreapp/brainstorm.html", context)
+    return render(request, "eunoiaapp/brainstorm.html", context)
 
 
 #     # Get global menu context
@@ -308,7 +308,7 @@ def error_500(request):
 
 
 class ProductView(View):
-    template_name = 'coreapp/producttest.html'     
+    template_name = 'eunoiaapp/producttest.html'     
     def get(self, request, *args, **kwargs):  
         global_context = get_global_menu_context(request.user)   
         print(args)  
@@ -410,7 +410,7 @@ class ProductView(View):
                 context['form'] = ActivityForm(instance=activity)
             
 
-        return render(request, "coreapp/product/{}.html".format(submenu), context)
+        return render(request, "eunoiaapp/product/{}.html".format(submenu), context)
 
     def post(self, request, *args, **kwargs):
         global_context = get_global_menu_context(request.user)     
@@ -520,7 +520,7 @@ class ProductView(View):
                     form.save()
             return redirect('/home/product/{}/activitykanban?feature_id={}'.format(product_id,feature_id))
 
-        return render(request, "coreapp/product/{}.html".format(submenu), context)
+        return render(request, "eunoiaapp/product/{}.html".format(submenu), context)
 
 
 

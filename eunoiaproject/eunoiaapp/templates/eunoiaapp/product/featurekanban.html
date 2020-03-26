@@ -1,4 +1,4 @@
-{% extends 'coreapp/base.html' %}
+{% extends 'eunoiaapp/base.html' %}
 {% block content %}
 {% load static %}
 <link rel="stylesheet" type="text/css" href="{% static 'postitnotes/postit.css' %}">
@@ -494,13 +494,13 @@ div.sketchyborder{
 <div class="container" id="getting-started">
   <ul class="breadcrumb">
     <li class="breadcrumb-item">
-      <a href="{% url 'coreapp:home'%}">Home</a>
+      <a href="{% url 'eunoiaapp:home'%}">Home</a>
     </li>
     <li class="breadcrumb-item">
-      <a href="{% url 'coreapp:kanban' action='all' id=0 %}">Kanbans</a>
+      <a href="{% url 'eunoiaapp:kanban' action='all' id=0 %}">Kanbans</a>
     </li>
     <!-- <li class="breadcrumb-item">
-      <a class="" href="{% url 'coreapp:kanban' action='new_kanban' id=0 %}">+</a>
+      <a class="" href="{% url 'eunoiaapp:kanban' action='new_kanban' id=0 %}">+</a>
     </li> -->
   </ul>
   <!-- Show New Feature Form -->
@@ -530,7 +530,7 @@ div.sketchyborder{
       color: #555;
     }
   </style>
-  <h4>Activities</h4>
+  <h4>Feature Kanban</h4>
   <div class="container">
     <div class="columns">      
       <div class="column col-4 col-sm-12" >
@@ -550,14 +550,14 @@ div.sketchyborder{
         {% for seq in todo_seq %}
         {% for todo in todos %}
 
-        {% if seq.type == 'TODO' and seq.activity_id == todo.id %}
+        {% if seq.type == 'TODO' and seq.feature_id == todo.id %}
       
-        <div class="column col-12 " id="activity-id-{{todo.id}}">
-          <a href="{% url 'coreapp:product' product_id=product.id submenu='activitykanban'%}?action=feature_update_todo&feature_id={{feature_id}}&activity_id={{todo.id}}">
+        <div class="column col-12 " id="feature-id-{{todo.id}}">
+          <a href="{% url 'eunoiaapp:product' product_id=product.id submenu='activitykanban'%}?feature_id={{todo.id}}">
           <div class="box yellow sketchy" style="transform: rotate({{todo.rnum}}deg);">
-            <h5 >{{todo.outcome}}</h5>
+            <h5 >{{todo.ability_to}}</h5>
             <ul class="yellow-list">
-              <!-- <li> <a href="{% url 'coreapp:kanban' action='edit_activity' id=todo.id%}">{{todo.outcome}}</a>
+              <!-- <li> <a href="{% url 'eunoiaapp:kanban' action='edit_activity' id=todo.id%}">{{todo.outcome}}</a>
 
               </li> -->
             </ul>
@@ -581,10 +581,11 @@ div.sketchyborder{
 
 
         {% if action == 'edit_activity' %}
-        <div class="modal active modal-sm" id="activity-id-{{todo.id}}">
+        <div class="modal active modal-sm" id="activity-modal-{{todo.id}}"><a class="modal-overlay" href="#modals-sizes"
+            aria-label="Close"></a>
           <div class="modal-container" role="document">
             <div class="modal-header"><a class="btn btn-clear float-right"
-                href="{% url 'coreapp:kanban' action='idea_kanban' id=idea_id %}" aria-label="Close"></a>
+                href="{% url 'eunoiaapp:kanban' action='idea_kanban' id=idea_id %}" aria-label="Close"></a>
               <div class="modal-title h5">Modal title</div>
             </div>
             <div class="modal-body">
@@ -602,18 +603,16 @@ div.sketchyborder{
       
         {% for seq in inprogress_seq %}
         {% for todo in inprogress %}
-        {% if seq.type == 'IN_PROGRESS' and seq.activity_id == todo.id %}
-        <div class="column col-12 " id="activity-id-{{todo.id}}">
-          <a href="{% url 'coreapp:product' product_id=product.id submenu='activitykanban'%}?action=feature_update_todo&feature_id={{feature_id}}&activity_id={{todo.id}}">
-            <div class="box yellow sketchy" style="transform: rotate({{todo.rnum}}deg);">
-              <h5 >{{todo.outcome}}</h5>
-              <ul class="yellow-list">
-                <!-- <li> <a href="{% url 'coreapp:kanban' action='edit_activity' id=todo.id%}">{{todo.outcome}}</a>
-  
-                </li> -->
-              </ul>
-            </div>
-          </a>
+        {% if seq.type == 'IN_PROGRESS' and seq.feature_id == todo.id %}
+        <div class="column col-12 " id="feature-id-{{todo.id}}">
+          <div class="box yellow  sketchy" style="transform: rotate({{todo.rnum}}deg);">
+            <h5>{{todo.ability_to}}</h5>
+            <ul class="yellow-list">
+              <!-- <li> <a href="{% url 'eunoiaapp:kanban' action='edit_activity' id=todo.id%}">{{todo.outcome}}</a>
+
+              </li> -->
+            </ul>
+          </div>
           {% if todo.priority == 'MUST_HAVE'%}
           <small style="">Must Have</small>
           {% elif todo.priority == 'SHOULD_HAVE'%}
@@ -634,10 +633,11 @@ div.sketchyborder{
 
 
         {% if action == 'edit_activity' %}
-        <div class="modal active modal-sm" id="activity-id-{{todo.id}}">
+        <div class="modal active modal-sm" id="activity-modal-{{todo.id}}"><a class="modal-overlay" href="#modals-sizes"
+            aria-label="Close"></a>
           <div class="modal-container" role="document">
             <div class="modal-header"><a class="btn btn-clear float-right"
-                href="{% url 'coreapp:kanban' action='idea_kanban' id=idea_id %}" aria-label="Close"></a>
+                href="{% url 'eunoiaapp:kanban' action='idea_kanban' id=idea_id %}" aria-label="Close"></a>
               <div class="modal-title h5">Modal title</div>
             </div>
             <div class="modal-body">
@@ -654,18 +654,16 @@ div.sketchyborder{
       <div class="column col-4  col-sm-12" id="done">
         {% for seq in done_seq %}
         {% for todo in done %}
-        {% if seq.type == 'DONE' and seq.activity_id == todo.id %}
-        <div class="column col-12 " id="activity-id-{{todo.id}}" >
-          <a href="{% url 'coreapp:product' product_id=product.id submenu='activitykanban'%}?action=feature_update_todo&feature_id={{feature_id}}&activity_id={{todo.id}}">
-            <div class="box yellow sketchy" style="transform: rotate({{todo.rnum}}deg);">
-              <h5 >{{todo.outcome}}</h5>
-              <ul class="yellow-list">
-                <!-- <li> <a href="{% url 'coreapp:kanban' action='edit_activity' id=todo.id%}">{{todo.outcome}}</a>
-  
-                </li> -->
-              </ul>
-            </div>
-          </a>
+        {% if seq.type == 'DONE' and seq.feature_id == todo.id %}
+        <div class="column col-12 " id="feature-id-{{todo.id}}" >
+          <div class="box yellow  sketchy" style="transform: rotate({{todo.rnum}}deg);">
+            <h5>{{todo.ability_to}}</h5>
+            <ul class="yellow-list">
+              <!-- <li> <a href="{% url 'eunoiaapp:kanban' action='edit_activity' id=todo.id%}">{{todo.outcome}}</a>
+
+              </li> -->
+            </ul>
+          </div>  
           {% if todo.priority == 'MUST_HAVE'%}
           <small style="">Must Have</small>
           {% elif todo.priority == 'SHOULD_HAVE'%}
@@ -686,7 +684,7 @@ div.sketchyborder{
             aria-label="Close"></a>
           <div class="modal-container" role="document">
             <div class="modal-header"><a class="btn btn-clear float-right"
-                href="{% url 'coreapp:kanban' action='idea_kanban' id=idea_id %}" aria-label="Close"></a>
+                href="{% url 'eunoiaapp:kanban' action='idea_kanban' id=idea_id %}" aria-label="Close"></a>
               <div class="modal-title h5">Modal title</div>
             </div>
             <div class="modal-body">
@@ -701,9 +699,7 @@ div.sketchyborder{
         {%endif %}
       </div>
     </div>
-    {% if  action == 'feature_update_todo' %}
-      {% include 'coreapp/product/task.html' %}
-    {% endif %}
+   
   </div>
 
 
@@ -729,7 +725,7 @@ div.sketchyborder{
       var orderArr = [];
       var allOrderArr = [];
       $(drake.containers[0]).children().each(function (e) {
-        var id_str = $(this).attr('id').split('activity-id-')[1];
+        var id_str = $(this).attr('id').split('feature-id-')[1];
         var id = parseInt(id_str);
         order = order + 1
         orderArr.push([id, order, 'TODO'])
@@ -740,7 +736,7 @@ div.sketchyborder{
       var order = -1;
       var orderArr = [];
       $(drake.containers[1]).children().each(function (e) {
-        var id_str = $(this).attr('id').split('activity-id-')[1];
+        var id_str = $(this).attr('id').split('feature-id-')[1];
         var id = parseInt(id_str);
         order = order + 1
         orderArr.push([id, order, 'IN_PROGRESS'])
@@ -751,7 +747,7 @@ div.sketchyborder{
       var order = -1;
       var orderArr = [];
       $(drake.containers[2]).children().each(function (e) {
-        var id_str = $(this).attr('id').split('activity-id-')[1];
+        var id_str = $(this).attr('id').split('feature-id-')[1];
         var id = parseInt(id_str);
         order = order + 1
         orderArr.push([id, order, 'DONE'])
@@ -761,7 +757,7 @@ div.sketchyborder{
       allOrderArr.push(orderArr);
       // send ajax request
       $.ajax({
-        url: "{% url 'coreapp:kanban' action='reorder_activity' id=0 %}",
+        url: "{% url 'eunoiaapp:product' product_id=product.id submenu='kanban'%}?action=change_feature_status",
         method: 'POST',
         data: { order: JSON.stringify(allOrderArr) },
         success: function (result) {

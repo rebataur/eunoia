@@ -197,7 +197,7 @@
                                 <p>Ecosystem Feedback</p>
 
                                 <!-- <p><span class="text-bold text-large text-success"> BEST VALUE </span></p> -->
-                               <form ic-post-to="{% url 'coreapp:notify' %}" method="POST">
+                               <form ic-post-to="{% url 'eunoiaapp:notify' %}" method="POST">
                                 {% csrf_token %}
                  
                                 <input name="email" type="email" placeholder="your email address" required/>
@@ -235,7 +235,7 @@
                                     
                                     
                                     </p>
-                                    <form ic-post-to="{% url 'coreapp:notify' %}" method="POST">
+                                    <form ic-post-to="{% url 'eunoiaapp:notify' %}" method="POST">
                                         {% csrf_token %}
                          
                                         <input name="email" type="email" placeholder="your email address" required/>

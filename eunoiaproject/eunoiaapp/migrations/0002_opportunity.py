@@ -7,7 +7,7 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('coreapp', '0001_initial'),
+        ('eunoiaapp', '0001_initial'),
     ]
 
     operations = [
