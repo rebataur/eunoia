@@ -73,14 +73,12 @@
 
         <div class="grid-hero container grid-lg text-center" id="overview">
             <div class="docs-brand"><a class="docs-logo" href="#">
-                    <!-- <img
-                        src="" alt="Eunoia"> -->
+                <img src="{% static 'images/logo.png'%}"/>
                     <h2>Eunoia</h2>
                     <hr>
-                    <em>Bring your teams best thoughts together to innovate</em>
+                    <em>bring togther your best ideas for your product</em>
                 </a></div>
-            <h1 style="background-color: gold;color:black;padding:1em;border-radius:4px">Validate your Ideas, Define
-                Your Product, Execute Your Project
+            <h1 style="background-color: gold;color:black;padding:2em;border-radius:4px">A playground for Entrepreneurs to evolve, refine, validate and structure their product ideas
             </h1>
             <h2 style="color:black">A
                 tool,
@@ -138,17 +136,17 @@
             <div class="container centered">
                 <h1 class="text-center" style="margin-top: 5%;">Pricing</h1>
                 <!-- <p class="text-center text-large explanation">It's usually good to offer 3 options for pricing. It's also a good practice to provide -->
-                visual clarification for the best deal.</p>
+                <!-- visual clarification for the best deal.</p> -->
                 <div class="columns" style="margin-left: 15%; margin-right: 15%;">
-                    <div class="column col-4 text-center">
+                    <div class="column col-4 col-sm-12 text-center">
 
                         <!-- mt-2 style pushes down left & right columns -->
                         <div class="card mt-2">
                             <div class="card-header bg-primary">
                                 <div class="card-title">
-                                    <h2>Early Stage Startup
+                                    <h2>Solopreneur
                                     </h2>
-                                    <h2>Eunoia Core</h2>
+                                    <!-- <h2>Eunoia Core</h2> -->
                                 </div><!-- .card-title -->
                             </div>
                             <!--- .card-header -->
@@ -156,91 +154,101 @@
                                 <p class="h3">OpenSource & Free Forever
                                     <span class="bg-gray h5">$0/month</span></p>
 
-                                <p>Single User
-                                    <p>Can Add 3 Guest User</p>
-                                    <p>(Guest users can Provide comments only)</p>
-                                    <p>500 Blocks</p>
-                                    <p>100 MB Storage</p>
-                                    <p>Brainstorming</p>
-                                    <p>Ideation / Validation</p>
-                                    <p>Features Definition</p>
-                                    <p>Prioritization</p>
-                                    <p>Kanban </p>
-                                    <a href="/signup" class="btn btn-default">Register</a>
+                                <p>Single User</p>
+                                <p>Invite 3 Guest User</p>
+                                <p>(Guest users can Provide comments only)</p>
+                                <p>500 Objects</p>
+                                <p>100 MB Storage</p>
+                                <p>Brainstorming</p>
+                                <p>Ideation / Validation</p>
+                                <p>Features Definition</p>
+                                <p>Prioritization</p>
+                                <p>Kanban </p>
+                                <a href="/signup" class="btn btn-default">Register</a>
                             </div><!-- .card-body -->
                         </div><!-- .card -->
 
                     </div><!-- .column .col-4 -->
 
-                    <div class="column col-4 text-center">
+                    <div class="column col-4  col-sm-12 text-center">
 
                         <!-- Without mt-2 style this "pushes up" the center column -->
                         <div class="card navshadow">
-                            <div class="card-header bg-primary">
+                            <div class="card-header bg-success">
                                 <div class="card-title">
-                                    <h2>Growth Stage Startup
-                                        <h2>Eunoia Lean</h2>
-                                        <em>Coming Soon</em>
+                                    <h2>Entrepreneur
+                                        <!-- <h2>Eunoia Lean</h2> -->
+
                                     </h2>
+                                    <em>Launching Soon</em>
                                 </div><!-- .card-title -->
                             </div>
                             <!--- .card-header -->
                             <div class="card-body">
-                                <p class="h3">$3/user/mo <span class="bg-gray h5"><small><br>20% Discount on yearly subscription</small></span></p>
-                                All of Eunoia Core
-                                <p>500Blocks/User</p>
-                                <p>100 MB/User</p>
-                                <p>Invite 9 Guests</p>
-                                <p>Collaboration Features</p>
+                                <p class="h3">$2/user/mo or $19/user/yr<span class="bg-gray h5"><small><br>20% Discount
+                                            on yearly subscription</small></span></p>
+                                <p>Multiple User within Org</p>
+                                <p>Can Invite 9 Guest User</p>
+                                <p>(Guest users can Provide comments only)</p>
+                                <p>1000 Blocks</p>
+                                <p>200 MB Storage</p>
+                                <p>Brainstorming</p>
+                                <p>Ideation / Validation</p>
+                                <p>Features Definition</p>
+                                <p>Prioritization</p>
+                                <p>Kanban </p>
+                                <p>Live Chat</p>
                                 <p>Comparative Market Data</p>
                                 <p>Org Structure/Mind Maps</p>
-                                <p>Ecosystem Feedback</p>
+                                <p>Eunoia Ecosystem Feedback</p>
 
                                 <!-- <p><span class="text-bold text-large text-success"> BEST VALUE </span></p> -->
-                               <form ic-post-to="{% url 'eunoiaapp:notify' %}" method="POST">
-                                {% csrf_token %}
-                 
-                                <input name="email" type="email" placeholder="your email address" required/>
-                                <button type="submit" class="btn btn-primary">Notify me</button>
-                            </form>
+                                <form ic-post-to="{% url 'eunoiaapp:notify' %}" method="POST">
+                                    {% csrf_token %}
+
+                                    <input name="email" type="email" placeholder="your email address" required />
+                                    <button type="submit" class="btn btn-primary">Notify me</button>
+                                </form>
                             </div><!-- .card-body -->
                         </div><!-- .card -->
 
                     </div><!-- .column .col-4 -->
 
-                    <div class="column col-4 text-center">
+                    <div class="column col-4  col-sm-12 text-center">
 
                         <!-- mt-2 style pushes down left & right columns -->
                         <div class="card mt-2">
-                            <div class="card-header bg-gray">
+                            <div class="card-header bg-warning">
                                 <div class="card-title">
-                                    <h2>Scale Stage Startup
-                                        <h2>Eunoia Extended</h2>
-                                        <em>Coming Soon</em>
+                                    <h2>Extension Task Apps
+                                        <!-- <h2>Eunoia Extended</h2> -->
+                                        <!-- <em>Coming Soon</em> -->
                                     </h2>
+                                    <em>Launching Soon</em>
                                 </div><!-- .card-title -->
                             </div>
                             <!--- .card-header -->
                             <div class="card-body">
-                                <p class="h3">$7/user/mo <span class="bg-gray h5"><small><br>20% Discount on yearly subscription</small></span></p>
-                                <p>All of Eunoia Lean Plus Supporting Apps in
-                                    <br>
+                                <p class="h3">$1/user/app/mo or $9/user/app/yr<span class="bg-gray h5"><small><br>20%
+                                            Discount on yearly
+                                            subscription</small></span></p>
 
-                                    <em>Digital Marketing</em>
-                                    <br>
-                                    <em> Recruitment</em>
-                                    <br>
-                                        <em>      HR</em>
-                                    
-                                    
-                                    
-                                    </p>
-                                    <form ic-post-to="{% url 'eunoiaapp:notify' %}" method="POST">
-                                        {% csrf_token %}
-                         
-                                        <input name="email" type="email" placeholder="your email address" required/>
-                                        <button type="submit" class="btn btn-primary">Notify me</button>
-                                    </form>
+                                <p>HR</p>
+                                <p>Recruitment</p>
+                                <p>Invoicing</p>
+                                <p>Digital Marketing App</p>
+
+
+
+
+
+                                </p>
+                                <form ic-post-to="{% url 'eunoiaapp:notify' %}" method="POST">
+                                    {% csrf_token %}
+
+                                    <input name="email" type="email" placeholder="your email address" required />
+                                    <button type="submit" class="btn btn-primary">Notify me</button>
+                                </form>
                             </div><!-- .card-body -->
                         </div><!-- .card -->
                     </div>
@@ -325,7 +333,7 @@
     </footer> -->
 
 
-    
+
     <script type="text/javascript" src="{% static 'js/jquery.js'%}"></script>
     <script type="text/javascript" src="{% static 'js/intercooler.min.js'%}"></script>
     <input name="csrfmiddlewaretoken" type="hidden" value="{{ csrf_token }}" id="csrf" ic-global-include="#csrf">

@@ -28,7 +28,7 @@
   </div>
   <!-- Show activities only for existing feature, new features don't have activities -->
   {% if action == 'existing_feature'   %}
-  <h4>Feature <a class=""
+  <h4>Activities <a class=""
       href="{% url 'eunoiaapp:product' product_id=product_id submenu=submenu%}?action=new_activity&feature_id={{feature_id|urlencode}} ">+</a>
   </h4>
 
@@ -84,8 +84,8 @@
   {% endif %}
 
   {% elif action == 'new_activity'  %}
-  <H4>Feature</H4>
-  <h6>Title: {{feature.title}}</h6>
+  <H4>Activity</H4>
+  <h6>Ability: {{feature.ability_to}} <em> for </em> {{feature.ability_for}}</h6>
   <h6>Description: {{feature.description}}</h6>
   <div class="container">
     <form method="POST" class="form-horizontal"
@@ -97,7 +97,7 @@
 
   {% elif action == 'existing_activity'  %}
   <H4>Feature</H4>
-  <h6>Title: {{feature.title}}</h6>
+  <h6>Ability: {{feature.ability_for}}</h6>
   <h6>Description: {{feature.description}}</h6>
   <div class="container">
     <form method="POST" class="form-horizontal"

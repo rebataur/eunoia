@@ -25,13 +25,13 @@
     <link rel="stylesheet" href="{% static 'spectre/dist/spectre-exp.min.css'%}">
     <link rel="stylesheet" href="{% static 'spectre/docs/dist/docs.min.css'%}">
     <link rel="canonical" href="https://eunoia.uno">
-    
+
     <link rel="stylesheet" href="{% static 'dragula/dist/dragula.min.css'%}">
     <style>
-        .docs-content{
+        .docs-content {
             /* width: calc(100vw - 2rem); */
         }
-        
+
         .docs-brand h2 {
             color: black;
         }
@@ -77,17 +77,16 @@
                         role="listbox" id="algolia-autocomplete-listbox-0">
                         <div class="ds-dataset-1"></div>
                     </span></span>
-                    
-                    <a class="btn btn-primary ml-1"
-                    href="/accounts/logout" >bye!</a>
-                    <a 
-                    href="" onclick="alert('Coming Soon, report bug');"><img style="margin-left:10px;height: 20px;width:20px" src="{% static 'images/bug_report.png'%}"></a>
+
+                <a class="btn btn-primary ml-1" href="/accounts/logout">bye!</a>
+                <a href="" onclick="alert('Coming Soon, report bug');"><img
+                        style="margin-left:10px;height: 20px;width:20px" src="{% static 'images/bug_report.png'%}"></a>
             </div>
         </div>
         <div class="docs-sidebar off-canvas-sidebar" id="sidebar">
-            <div class="docs-brand"><a class="docs-logo" href="/home"><img src="{% static 'images/ninjastar.png'%}"
+            <div class="docs-brand"><a class="docs-logo" href="/home"><img src="https://cdn0.iconfinder.com/data/icons/education-part-2-1/512/27-128.png"
                         alt="Eunoia">
-                    <h2>Eunoia - beautiful minds focussed on innovating</h2>
+                    <h2>Eunoia</h2>
                 </a></div>
             <div class="docs-nav">
                 <div class="accordion-container">
@@ -97,7 +96,7 @@
                         <label class="accordion-header c-hand" for="accordion-getting-started">Ideation</label>
                         <div class="accordion-body">
                             <ul class="menu menu-nav">
-                               
+
                                 <style>
                                     i#dnd_i.form-icon {
                                         background: rgb(208, 224, 208);
@@ -130,14 +129,17 @@
                                 <li class="menu-item"><a href="getting-started/browsers.html">Org <small
                                             class="coming-soon">Coming Soon</small></a>
                                 </li> -->
-                                <li class="menu-item"><a
-                                    href="{% url 'eunoiaapp:brainstorm' action='all' id=0 %}">Brainstorm</a>
-                            </li>
-                                <li class="menu-item"><a
-                                        href="{% url 'eunoiaapp:idea' action='all' id=0 %}">Ideas</a>
+                                <li class="menu-item"><a href="{% url 'eunoiaapp:idea' action='all' id=0 %}">Team</a>
                                 </li>
-                                <li class="menu-item"><a href="{% url 'eunoiaapp:kanban' action='all' id=0 %}">Todos</a>
+                                <li class="menu-item"><a
+                                        href="{% url 'eunoiaapp:brainstorm' action='all' id=0 %}">Brainstorm</a>
                                 </li>
+                                <li class="menu-item"><a href="{% url 'eunoiaapp:idea' action='all' id=0 %}">Ideas</a>
+                                </li>
+
+                                
+                                <!-- <li class="menu-item"><a href="{% url 'eunoiaapp:kanban' action='all' id=0 %}">Todos</a>
+                                </li> -->
                                 <!-- <li class="menu-item"><a href="getting-started/whatsnew.html">Notes</a>
                                 </li> -->
                                 <!-- <li class="menu-item"><a href="elements/icons.html">Documents</a>
@@ -176,7 +178,8 @@
                                                 </li> -->
                                                 <!-- <li class="menu-item"><a href="elements/icons.html">Plan</a>
                                                 </li> -->
-                                                <li class="menu-item"><a  href="{% url 'eunoiaapp:product' product_id=product.id submenu='featurekanban' %}">Kanban</a>
+                                                <li class="menu-item"><a
+                                                        href="{% url 'eunoiaapp:product' product_id=product.id submenu='featurekanban' %}">Kanban</a>
                                                 </li>
                                                 <!-- <li class="menu-item"><a href="elements/forms.html">Meeting</a>
                                                 </li>
@@ -185,7 +188,7 @@
                                           
                                                 <li class="menu-item"><a href="elements/icons.html">Marketing</a>
                                                 </li> -->
-                                               
+
                                                 <!-- <li class="menu-item"><a href="elements/icons.html">Documents</a>
                                                 </li> -->
                                             </ul>
@@ -200,7 +203,7 @@
 
                         <div class="accordion-body">
                             <ul class="menu menu-nav">
-<!-- 
+                                <!-- 
                                 <li class="menu-item"><a href="getting-started/whatsnew.html">Product Admin</a>
                                 </li> -->
                             </ul>
@@ -303,7 +306,8 @@
                     <a href="#">
                         <figure class="avatar badge" data-badge="8" data-initial="YZ"><img
                                 src="{% static 'spectre/docs/img/avatar-1.png'%}" alt="YZ"></figure>
-                    </a> {{global_context.profile_instance.user.first_name}} {{global_context.profile_instance.user.last_name}}
+                    </a> {{global_context.profile_instance.user.first_name}}
+                    {{global_context.profile_instance.user.last_name}}
                     <small style="font-size: 0.5em;"><a href="#">(Co-Founder & CTO)</small></a>
                     <!-- <small style="font-size: 0.5em;"><a href="#">QNotes</small></a> -->
 
@@ -334,46 +338,46 @@
                     </div>
                 </div> -->
 
-                
-<script type="text/javascript" src="{% static 'js/jquery.js'%}"></script>
-<script type="text/javascript" src="{% static 'js/intercooler.min.js'%}"></script>
-<script type="text/javascript" src="{% static 'dragula/dist/dragula.min.js'%}"></script>
-<script>
-$(document).ready(function () {
-        $.ajaxSetup({
-            beforeSend: function (xhr, settings) {
-                function getCookie(name) {
-                    var cookieValue = null;
-                    if (document.cookie && document.cookie != '') {
-                        var cookies = document.cookie.split(';');
-                        for (var i = 0; i < cookies.length; i++) {
-                            var cookie = jQuery.trim(cookies[i]);
-                            // Does this cookie string begin with the name we want?
+
+                <script type="text/javascript" src="{% static 'js/jquery.js'%}"></script>
+                <script type="text/javascript" src="{% static 'js/intercooler.min.js'%}"></script>
+                <script type="text/javascript" src="{% static 'dragula/dist/dragula.min.js'%}"></script>
+                <script>
+                    $(document).ready(function () {
+                        $.ajaxSetup({
+                            beforeSend: function (xhr, settings) {
+                                function getCookie(name) {
+                                    var cookieValue = null;
+                                    if (document.cookie && document.cookie != '') {
+                                        var cookies = document.cookie.split(';');
+                                        for (var i = 0; i < cookies.length; i++) {
+                                            var cookie = jQuery.trim(cookies[i]);
+                                            // Does this cookie string begin with the name we want?
 
 
-                            if (cookie.substring(0, name.length + 1) == (name + '=')) {
-                                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-                                break;
+                                            if (cookie.substring(0, name.length + 1) == (name + '=')) {
+                                                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                                                break;
+                                            }
+                                        }
+                                    }
+                                    return cookieValue;
+                                }
+                                if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
+                                    // Only send the token to relative URLs i.e. locally.
+                                    xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
+                                }
                             }
-                        }
-                    }
-                    return cookieValue;
-                }
-                if (!(/^http:.*/.test(settings.url) || /^https:.*/.test(settings.url))) {
-                    // Only send the token to relative URLs i.e. locally.
-                    xhr.setRequestHeader("X-CSRFToken", getCookie('csrftoken'));
-                }
-            }
-        });
+                        });
 
 
 
-      
 
-    });
 
-   
-</script>
+                    });
+
+
+                </script>
 
                 {% block content %}
                 {% endblock %}
@@ -391,5 +395,3 @@ $(document).ready(function () {
 </body>
 
 </html>
-
-    

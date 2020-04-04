@@ -18,7 +18,8 @@ USER_TYPE = (
     ("CEO", "CEO"),
     ("PO", "Product Owner"),
     ('SCRUM_MASTER','Scrum Master'),
-    ('DEVELOPER','Developer')
+    ('DEVELOPER','Developer'),
+    ('GUEST','Guest')
 )
 
 class Profile(models.Model):
